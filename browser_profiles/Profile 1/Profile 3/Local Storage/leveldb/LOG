@@ -1,0 +1,6 @@
+2023/06/16-19:00:11.385 2ff0 Reusing MANIFEST D:\automationExcercise\browser_profile\Profile 3\Local Storage\leveldb/MANIFEST-000001
+2023/06/16-19:00:11.386 2ff0 Recovering log #4
+2023/06/16-19:00:11.387 2ff0 Reusing old log D:\automationExcercise\browser_profile\Profile 3\Local Storage\leveldb/000004.log 
+2023/06/16-19:00:19.529 74cc Level-0 table #7: started
+2023/06/16-19:00:19.532 74cc Level-0 table #7: 47900 bytes OK
+2023/06/16-19:00:19.534 74cc Delete type=0 #4
