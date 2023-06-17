@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="UI Tests Gradle" parallel="false" thread-count="2">
+    <listeners>
+<!--        <listener class-name='tests.base.AnnotationTransformer'/>-->
+<!--        <listener class-name="tests.base.TestListener"/>-->
+    </listeners>
+    <test name="Main page tests">
+        <classes>
+            <class name="tests.MainPageTest"/>
+            <class name="tests.SignUpTest"/>
+        </classes>
+    </test>
+</suite>
