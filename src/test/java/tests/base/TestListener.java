@@ -3,6 +3,7 @@ package tests.base;
 //import adapters.ProjectAPI;
 
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.io.FileUtils;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -10,6 +11,10 @@ import utils.PropertyReader;
 //import utils.TestRunRunner;
 //import utils.TestRunsChecker;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
@@ -28,11 +33,14 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult iTestResult) {
         System.out.printf("======================================== STARTING TEST CASE --> '%s' ========================================%n", iTestResult.getMethod().getMethodName());
+        log.info(format("========================= STARTING TEST CASE --> '%s' =========================", iTestResult.getMethod().getMethodName()));
+
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
         System.out.printf("======================================== FINISHED TEST CASE --> '%s'; Duration: %ss ========================================%n", iTestResult.getMethod().getMethodName(), getExecutionTime(iTestResult));
+        log.info(format("========================= FINISHED TEST CASE --> '%s'; Duration: %ss =========================%n", iTestResult.getMethod().getMethodName(), getExecutionTime(iTestResult)));
 //        if (testRun && iTestResult.getStatus() == 1) {
 //            ProjectAPI api = new ProjectAPI();
 //            api.setStatus("passed", codeProject, testRunID, caseID, getExecutionTime(iTestResult));
@@ -67,6 +75,20 @@ public class TestListener implements ITestListener {
 
 //    @Override
 //    public void onStart(ITestContext iTestContext) {
+//        String logs = "/Volumes/Work/automationExcercise/target/testsLog.log";
+//        try {
+//            Files.deleteIfExists(Paths.get("/Volumes/Work/automationExcercise/target/testsLog.log"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            FileUtils.forceDelete(new File("/Volumes/Work/automationExcercise/target/screenshots"));
+//            FileUtils.forceDelete(new File("/Volumes/Work/automationExcercise/target/testsLog.log"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
 //        TestRunsChecker testRunsChecker = new TestRunsChecker();
 //        TestRunRunner testRunRunner = new TestRunRunner();
 //        testRunsChecker.isTestRunCreated();
