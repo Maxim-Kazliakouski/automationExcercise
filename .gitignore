@@ -28,4 +28,4 @@ build/
 target/
 .gradle/
 *.iml
-browser_profiles/
+browser_profiles/*
