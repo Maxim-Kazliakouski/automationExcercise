@@ -29,3 +29,7 @@ target/
 .gradle/
 *.iml
 /browser_profiles/*
+/browser_profiles/Crashpad/
+/browser_profiles/Profile 1/
+/browser_profiles/GrShaderCache/
+/browser_profiles/ShaderCache/
