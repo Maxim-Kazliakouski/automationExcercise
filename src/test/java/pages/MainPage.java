@@ -7,7 +7,7 @@ import com.codeborne.selenide.SelenideElement;
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selenide.*;
-import static constants.MainPageConstants.*;
+import static constants.MainPageLocators.*;
 import static java.lang.String.format;
 
 public class MainPage {
@@ -17,14 +17,15 @@ public class MainPage {
         return this;
     }
 
-    public void isOpened() {
+    public MainPage isOpened() {
         $x(HOME_BUTTON).shouldBe(Condition.visible);
+        return this;
     }
 
     public MainPage clickOnEachTabAndCheckWorkability() {
         System.out.println("The list of tabs names --> " + gettingAllTabsNames());
         for (String tabNameFromTheList : gettingAllTabsNames()) {
-            $x(format("//li/a[contains(text(),'%s')]", tabNameFromTheList)).click();
+            $x(format(TAB_IN_HEADER, tabNameFromTheList)).click();
             switch (tabNameFromTheList) {
                 case ("Products"):
                     $x(PRODUCTS_PAGE_MARKER).shouldBe(Condition.visible);
@@ -63,5 +64,18 @@ public class MainPage {
             } else tabNamesList.add(tabName.getText());
         }
         return tabNamesList;
+    }
+
+    public void checkLoginUser(String username) {
+        $x(format(LOGGED_USER_NAME, username)).shouldBe(Condition.visible);
+    }
+
+    public void logout() {
+        $x(LOGOUT_BUTTON).click();
+    }
+
+    public void checkThatUserLogout() {
+        $x(SIGN_UP_LOGIN_PAGE_MARKER).shouldBe(Condition.visible);
+        $x(SIGNUP_LOGIN_BUTTON).shouldBe(Condition.visible);
     }
 }
