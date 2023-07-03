@@ -4,7 +4,7 @@ import com.codeborne.selenide.Condition;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
-import static constants.MainPageConstants.PRODUCTS_PAGE_MARKER;
+import static constants.MainPageLocators.PRODUCTS_PAGE_MARKER;
 
 public class ProductPage {
 
