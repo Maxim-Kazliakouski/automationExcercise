@@ -23,6 +23,7 @@ dependencies {
     implementation 'io.qameta.allure:allure-selenide:2.21.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.10.0'
     implementation 'com.github.javafaker:javafaker:1.0.2'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2'
 
 }
 
