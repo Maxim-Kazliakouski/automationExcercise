@@ -2,7 +2,6 @@ package tests;
 
 import jdk.jfr.Description;
 import org.testng.annotations.Test;
-import tests.base.BaseTest;
 
 public class MainPageTest extends BaseTest {
 //    @DataProvider
