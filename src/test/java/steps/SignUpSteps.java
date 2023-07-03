@@ -41,4 +41,10 @@ public class SignUpSteps {
         signUpLoginPage
                 .deleteCratedAccount();
     }
+
+    public SignUpSteps signUpWithCreds(String name, String email) {
+        signUpLoginPage
+                .signUp(name, email);
+        return this;
+    }
 }

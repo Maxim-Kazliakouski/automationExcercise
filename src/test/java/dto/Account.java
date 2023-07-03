@@ -27,7 +27,4 @@ public class Account {
     public String city;
     public String zipCode;
     public String mobileNumber;
-
-
-
 }
