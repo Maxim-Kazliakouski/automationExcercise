@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 public class Account {
     // account information
-    public String title;
+    public String gender;
     public String name;
     public String email;
     public String password;
