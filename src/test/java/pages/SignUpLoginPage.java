@@ -32,7 +32,7 @@ public class SignUpLoginPage extends BasePage{
         username = account.getName();
         signUp(username, account.getEmail());
         $x(SECOND_PHASE_PAGE_MARKER).shouldBe(Condition.visible);
-        new RadioButton("Title").select(account.getTitle());
+        new RadioButton("Title").select(account.getGender());
         new TextInputLabel("Password").write(account.getPassword());
         new Dropdown("Date of Birth").select("days", account.getDayOfBirth());
         new Dropdown("Date of Birth").select("months", account.getMonthOfBirth());
@@ -57,7 +57,7 @@ public class SignUpLoginPage extends BasePage{
 
     public void checkLoggedCreatedAccount() {
         $x(CONTINUE_BUTTON).click();
-        $x(format("//b[text()='%s']", username)).shouldBe(Condition.visible);
+        $x(format(LOGGED_USER_NAME, username)).shouldBe(Condition.visible);
     }
 
     public void deleteCratedAccount() {
@@ -77,8 +77,6 @@ public class SignUpLoginPage extends BasePage{
     public void signUp(String name, String email) {
         new TextInputOther("input", "signup-name").write(name);
         new TextInputOther("input", "signup-email").write(email);
-//        $x(SIGN_UP_NAME_FIELD).sendKeys(name);
-//        $x(SIGN_UP_EMAIL_FIELD).sendKeys(email);
         $x(SIGN_UP_BUTTON).click();
     }
 
