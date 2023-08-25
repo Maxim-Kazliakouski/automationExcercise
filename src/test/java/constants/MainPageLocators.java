@@ -18,9 +18,15 @@ public class MainPageLocators {
     // markers to recognize that certain page is opened
     public static final String HOME_PAGE_MARKER = "//h2[text()='Feature Items']";
     public static final String PRODUCTS_PAGE_MARKER = "//h2[text()='Category']";
-    public static final String CART_PAGE_MARKER = "//b[text()='Cart is empty!']";
+    public static final String CART_PAGE_MARKER = "//li[text()='Shopping Cart']";
     public static final String SIGN_UP_LOGIN_PAGE_MARKER = "//h2[text()='Login to your account']";
     public static final String TEST_CASES_PAGE_MARKER = "//b[text()='Test Cases']";
     public static final String API_TESTING_PAGE_MARKER = "//b[text()='APIs List for practice']";
     public static final String CONTACT_US_PAGE_MARKER = "//h2[text()='Contact ']";
+    public static final String PRODUCT_DETAILS_PAGE_MARKER = "//a[text()='Write Your Review']";
+    // other locators
+    public static final String SUBSCRIPTION = "//h2[text()='Subscription']";
+    public static final String SUBSCRIPTION_EMAIL_ADDRESS_FIELD = "#susbscribe_email";
+    public static final String SUBSCRIPTION_SUBMIT_BUTTON = "#subscribe";
+    public static final String SUCCESS_SUBSCRIBE_NOTIFICATION = "//div[@id='success-subscribe']/div[text()='You have been successfully subscribed!']";
 }
