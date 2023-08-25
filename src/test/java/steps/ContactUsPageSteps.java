@@ -5,23 +5,22 @@ import factories.EmailBodyFactory;
 import lombok.extern.log4j.Log4j2;
 import pages.ContactUsPage;
 
-import static com.codeborne.selenide.Selenide.sleep;
 @Log4j2
-public class ContactUsSteps {
+public class ContactUsPageSteps {
     ContactUsPage contactUsPage;
 
-    public ContactUsSteps() {
+    public ContactUsPageSteps() {
         contactUsPage = new ContactUsPage();
     }
 
-    public ContactUsSteps openPage() {
+    public ContactUsPageSteps openPage() {
         contactUsPage
                 .openPage()
                 .isOpened();
         return this;
     }
 
-    public ContactUsSteps createNewEmailBody(String absolutePathToUploadFile) {
+    public ContactUsPageSteps createNewEmailBody(String absolutePathToUploadFile) {
         EmailBody newEmailBody = EmailBodyFactory.getEmailBody(absolutePathToUploadFile);
         contactUsPage
                 .createEmail(newEmailBody);
@@ -29,7 +28,7 @@ public class ContactUsSteps {
         return this;
     }
 
-    public ContactUsSteps isSuccessNotificationAppeared() {
+    public ContactUsPageSteps isSuccessNotificationAppeared() {
         contactUsPage
                 .successNotificationMessage();
         return this;
