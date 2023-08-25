@@ -4,34 +4,33 @@ import dto.Account;
 import factories.AccountFactory;
 import pages.SignUpLoginPage;
 
-public class SignUpSteps {
+public class SignUpPageSteps {
     SignUpLoginPage signUpLoginPage;
 
-    public SignUpSteps() {
+    public SignUpPageSteps() {
         signUpLoginPage = new SignUpLoginPage();
     }
 
-    public SignUpSteps openPage() {
+    public SignUpPageSteps openPage() {
         signUpLoginPage
                 .openPage()
                 .isPageOpened();
         return this;
     }
 
-    public SignUpSteps createNewUser() {
-        Account newAccount = AccountFactory.getAccount("Mrs", "5", "9", "1991", "Canada");
+    public SignUpPageSteps createNewUser(Account newAccount) {
         signUpLoginPage
                 .createNewAccount(newAccount);
         return this;
     }
 
-    public SignUpSteps isAccountCreated() {
+    public SignUpPageSteps isAccountCreated() {
         signUpLoginPage
                 .checkCreatedAccount();
         return this;
     }
 
-    public SignUpSteps isLoggedAsCreatedAccount() {
+    public SignUpPageSteps isLoggedAsCreatedAccount() {
         signUpLoginPage
                 .checkLoggedCreatedAccount();
         return this;
@@ -42,7 +41,7 @@ public class SignUpSteps {
                 .deleteCratedAccount();
     }
 
-    public SignUpSteps signUpWithCreds(String name, String email) {
+    public SignUpPageSteps signUpWithCreds(String name, String email) {
         signUpLoginPage
                 .signUp(name, email);
         return this;
