@@ -11,6 +11,6 @@ public class TextInputLabel {
     }
 
     public void write(String value) {
-        $x(format("//label[contains(text(),'%s')]//..//input", label)).setValue(value);
+        $x(format("//label[contains(text(),\"%s\")]//..//input", label)).setValue(value);
     }
 }
