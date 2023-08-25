@@ -25,17 +25,17 @@ public class MainPageSteps {
         return this;
     }
 
-    public MainPageSteps isOpened() {
+    public MainPageSteps isMainPageOpened() {
         mainPage
                 .isOpened();
         return this;
     }
 
     public void clickOnTab(String tabName) {
-        $x(format("//li/a[text()=' %s']", tabName)).shouldBe(Condition.visible);
+        $x(format("//li/a[text()=' %s']", tabName)).shouldBe(Condition.visible).click();
     }
 
-    public MainPageSteps clickOnHeaderTabs() {
+    public MainPageSteps clickOnAllHeaderTabs() {
         mainPage
                 .clickOnEachTabAndCheckWorkability();
         return this;
@@ -57,5 +57,11 @@ public class MainPageSteps {
     public void isUserLogout() {
         mainPage
                 .checkThatUserLogout();
+    }
+
+    public void toSubscribe(String emailForSubscribing) {
+        mainPage
+                .toSubscribeAtFooterOfThePage(emailForSubscribing)
+                .isSubscribed();
     }
 }
