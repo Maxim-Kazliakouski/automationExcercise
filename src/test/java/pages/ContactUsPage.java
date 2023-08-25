@@ -9,9 +9,8 @@ import tests.wrappers.TextInputOther;
 import java.io.File;
 
 import static com.codeborne.selenide.Selenide.*;
-import static constants.ContactUsLocators.*;
+import static constants.ContactUsPageLocators.*;
 import static constants.MainPageLocators.CONTACT_US_PAGE_MARKER;
-import static constants.MainPageLocators.HOME_PAGE_MARKER;
 
 @Log4j2
 public class ContactUsPage extends BasePage{
