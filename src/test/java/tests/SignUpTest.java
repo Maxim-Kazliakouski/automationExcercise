@@ -1,5 +1,7 @@
 package tests;
 
+import dto.Account;
+import factories.AccountFactory;
 import jdk.jfr.Description;
 import org.testng.annotations.Test;
 
@@ -11,16 +13,17 @@ public class SignUpTest extends BaseTest {
         mainPageSteps
                 .openPage()
                 .clickOnTab("Products");
-        signUpSteps
+        signUpPageSteps
                 .openPage();
     }
 
     @Test
     @Description("Test for creating new account")
     public void createNewAccount() {
-        signUpSteps
+        Account account = AccountFactory.getAccount("Mrs", "Canada");
+        signUpPageSteps
                 .openPage()
-                .createNewUser()
+                .createNewUser(account)
                 .isAccountCreated()
                 .isLoggedAsCreatedAccount()
                 .isAccountDeleted();
