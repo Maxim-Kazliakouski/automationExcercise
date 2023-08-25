@@ -8,21 +8,21 @@ public class LoginTest extends BaseTest {
     @Test
     @Description("Test for checking that created user can log in")
     public void login() {
-        signUpSteps
+        signUpPageSteps
                 .openPage();
-        loginSteps
+        loginPageSteps
                 .loginWithCreds("123@mail.com", "123");
         mainPageSteps
-                .isOpened()
+                .isMainPageOpened()
                 .isUserLogged("max");
     }
 
     @Test
     @Description("Test for checking that user with invalid creds can't log in")
     public void loginWithInvalidCreds() {
-        signUpSteps
+        signUpPageSteps
                 .openPage();
-        loginSteps
+        loginPageSteps
                 .loginWithCreds("000@mail.ru", "000")
                 .checkNotificationAndColor("Your email or password is incorrect!");
     }
@@ -30,12 +30,12 @@ public class LoginTest extends BaseTest {
     @Test
     @Description("Test for checking that user has ability to logout")
     public void logout() {
-        signUpSteps
+        signUpPageSteps
                 .openPage();
-        loginSteps
+        loginPageSteps
                 .loginWithCreds("123@mail.com", "123");
         mainPageSteps
-                .isOpened()
+                .isMainPageOpened()
                 .isUserLogged("max")
                 .logout()
                 .isUserLogout();
@@ -44,10 +44,10 @@ public class LoginTest extends BaseTest {
     @Test
     @Description("Test for checking that there is no ability to register user with existing email")
     public void existingEmail() {
-        signUpSteps
+        signUpPageSteps
                 .openPage()
                 .signUpWithCreds("max", "123@mail.com");
-        loginSteps
+        loginPageSteps
                 .checkNotificationAndColor("Email Address already exist!");
     }
 }
