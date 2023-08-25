@@ -3,6 +3,8 @@ package tests;
 import jdk.jfr.Description;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Selenide.sleep;
+
 public class MainPageTest extends BaseTest {
 //    @DataProvider
 //    public Object[][] tabsNames() {
@@ -28,6 +30,14 @@ public class MainPageTest extends BaseTest {
     public void checkAllTabsInHeader() {
         mainPageSteps
                 .openPage()
-                .clickOnHeaderTabs();
+                .clickOnAllHeaderTabs();
+    }
+
+    @Test
+    @Description("Test for checking subscription at home page")
+    public void subscriptionAtMainPage() {
+        mainPageSteps
+                .openPage()
+                .toSubscribe("123@mail.co");
     }
 }
