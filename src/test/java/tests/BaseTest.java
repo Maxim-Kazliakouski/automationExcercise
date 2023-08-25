@@ -4,43 +4,35 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-//import dto.Project;
-//import io.cucumber.java.After;
-//import io.cucumber.java.AfterAll;
-//import io.cucumber.java.Before;
-//import io.cucumber.java.Scenario;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
-//import tests.api.moduls.APIResponse;
-//import tests.api.moduls.Project.Entity;
-import steps.ContactUsSteps;
-import steps.LoginSteps;
-import steps.MainPageSteps;
-import steps.SignUpSteps;
+import steps.*;
 import tests.base.TestListener;
 import utils.PropertyReader;
 
-import java.io.File;
-import java.io.IOException;
 
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.clearBrowserCache;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static java.lang.String.format;
 
 @Log4j2
 @Listeners(TestListener.class)
 public class BaseTest {
     public MainPageSteps mainPageSteps;
-    public SignUpSteps signUpSteps;
-    public LoginSteps loginSteps;
-    public ContactUsSteps contactUsSteps;
+    public SignUpPageSteps signUpPageSteps;
+    public LoginPageSteps loginPageSteps;
+    public ContactUsPageSteps contactUsPageSteps;
+    public TestCasesPageSteps testCasesPageSteps;
+    public ProductsPageSteps productsPageSteps;
+    public ItemPageSteps itemPageSteps;
+    public CartPageSteps cartPageSteps;
+    public ProductsDetailsPageSteps productsDetailsPageSteps;
+    public OrderCheckoutSteps orderCheckoutSteps;
 
     String username;
     String password;
@@ -49,6 +41,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void init() {
+
 //        if (Boolean.parseBoolean(PropertyReader.getProperty("api"))) {
 //        } else {
 //      getting test case ID
@@ -90,19 +83,37 @@ public class BaseTest {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--disable-infobars");
         chromeOptions.addArguments("--disable-password-manager-reauthentication");
-        chromeOptions.addArguments("--user-data-dir=/Volumes/Work/browser_profiles");
-        chromeOptions.addArguments("--profile-directory=Profile 1");
+        switch (PropertyReader.getProperty("os")) {
+            case ("windows"):
+                chromeOptions.addArguments("--user-data-dir=");
+                break;
+            case ("macos"):
+                chromeOptions.addArguments("--user-data-dir=/Volumes/Work/browser_profiles");
+                chromeOptions.addArguments("--profile-directory=Profile 1");
+                break;
+        }
+//        chromeOptions.addArguments("--profile-directory=Profile 1");
+
         capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+
+
         Configuration.browserCapabilities = capabilities;
 
         // create objects...
         mainPageSteps = new MainPageSteps();
-        signUpSteps = new SignUpSteps();
-        loginSteps = new LoginSteps();
-        contactUsSteps = new ContactUsSteps();
-        open();
-//        clearBrowserLocalStorage();
-//        clearBrowserCookies();
+        signUpPageSteps = new SignUpPageSteps();
+        loginPageSteps = new LoginPageSteps();
+        contactUsPageSteps = new ContactUsPageSteps();
+        testCasesPageSteps = new TestCasesPageSteps();
+        productsPageSteps = new ProductsPageSteps();
+        itemPageSteps = new ItemPageSteps();
+        cartPageSteps = new CartPageSteps();
+        orderCheckoutSteps = new OrderCheckoutSteps();
+        productsDetailsPageSteps = new ProductsDetailsPageSteps();
+        open("/");
+        clearBrowserLocalStorage();
+        clearBrowserCookies();
+        clearBrowserCache();
         getWebDriver().manage().window().maximize();
     }
 
@@ -112,6 +123,19 @@ public class BaseTest {
         } else if (getWebDriver() != null) {
             getWebDriver().quit();
         }
+    }
+
+    public String chooseOS() {
+        String filePath = null;
+        switch (PropertyReader.getProperty("os")) {
+            case ("macos"):
+                filePath = "/Volumes/Work/automationExcercise/fileForUploading.txt";
+                break;
+            case ("windows"):
+                filePath = "D\\automationExcercise\\fileForUploading.txt";
+                break;
+        }
+        return filePath;
     }
 
 //    @AfterAll
