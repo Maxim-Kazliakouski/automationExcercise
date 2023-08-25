@@ -9,16 +9,16 @@ import static constants.SignUpLoginPageLocators.ERROR_NOTIFICATION;
 import static java.lang.String.format;
 
 @Log4j2
-public class LoginSteps {
+public class LoginPageSteps {
     MainPage mainPage;
     SignUpLoginPage signUpLoginPage;
 
-    public LoginSteps() {
+    public LoginPageSteps() {
         mainPage = new MainPage();
         signUpLoginPage = new SignUpLoginPage();
     }
 
-    public LoginSteps loginWithCreds(String email, String password) {
+    public LoginPageSteps loginWithCreds(String email, String password) {
         signUpLoginPage
                 .login(email, password);
         log.info(format("Login with email --> %s and password --> %s", email, password));
