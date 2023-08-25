@@ -3,6 +3,7 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
 
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static constants.MainPageLocators.*;
 import static java.lang.String.format;
 
-public class MainPage {
+public class MainPage extends BasePage{
 
     public MainPage openPage() {
         open("/");
@@ -77,5 +78,17 @@ public class MainPage {
     public void checkThatUserLogout() {
         $x(SIGN_UP_LOGIN_PAGE_MARKER).shouldBe(Condition.visible);
         $x(SIGNUP_LOGIN_BUTTON).shouldBe(Condition.visible);
+    }
+
+    public MainPage toSubscribeAtFooterOfThePage(String email) {
+        scrollToTheEndOfAPage();
+        $x(SUBSCRIPTION).shouldBe(Condition.visible);
+        $(SUBSCRIPTION_EMAIL_ADDRESS_FIELD).setValue(email);
+        $(SUBSCRIPTION_SUBMIT_BUTTON).click();
+        return this;
+    }
+
+    public void isSubscribed() {
+        $x(SUCCESS_SUBSCRIBE_NOTIFICATION).shouldBe(Condition.visible);
     }
 }
