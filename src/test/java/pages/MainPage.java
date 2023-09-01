@@ -3,15 +3,15 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static constants.MainPageLocators.*;
 import static java.lang.String.format;
 
-public class MainPage extends BasePage{
+public class MainPage extends BasePage {
 
     public MainPage openPage() {
         open("/");
@@ -37,14 +37,14 @@ public class MainPage extends BasePage{
                 case ("Signup / Login"):
                     $x(SIGN_UP_LOGIN_PAGE_MARKER).shouldBe(Condition.visible);
                     break;
-                case("Test Cases"):
+                case ("Test Cases"):
                     $x(TEST_CASES_PAGE_MARKER).shouldBe(Condition.visible);
                     break;
-                case("API Testing"):
+                case ("API Testing"):
                     $x(API_TESTING_PAGE_MARKER).shouldBe(Condition.visible);
                     break;
 //                case("Video Tutorials"):
-                case("Contact us"):
+                case ("Contact us"):
                     $x(CONTACT_US_PAGE_MARKER).shouldBe(Condition.visible);
                     break;
             }
@@ -81,7 +81,7 @@ public class MainPage extends BasePage{
     }
 
     public MainPage toSubscribeAtFooterOfThePage(String email) {
-        scrollToTheEndOfAPage();
+        scrollToTheEndOfThePage();
         $x(SUBSCRIPTION).shouldBe(Condition.visible);
         $(SUBSCRIPTION_EMAIL_ADDRESS_FIELD).setValue(email);
         $(SUBSCRIPTION_SUBMIT_BUTTON).click();
@@ -90,5 +90,26 @@ public class MainPage extends BasePage{
 
     public void isSubscribed() {
         $x(SUCCESS_SUBSCRIBE_NOTIFICATION).shouldBe(Condition.visible);
+    }
+
+    public void clickOnCategory(String categoryName) {
+        $x(format(CATEGORY_LOCATOR, categoryName)).shouldBe(Condition.visible).click();
+    }
+
+    public void clickOnSubCategory(String categoryName, String subcategoryName) {
+        $x(format(SUBCATEGORY_LOCATOR, categoryName, subcategoryName)).shouldBe(Condition.visible).click();
+    }
+
+    public String getProductHeader() {
+        return $x(PRODUCT_HEADER).shouldBe(Condition.visible).getText();
+    }
+
+    public void checkRecommendedItemsHeader() {
+        $x(RECOMMENDED_ITEMS_HEADER).shouldBe(Condition.visible);
+    }
+
+    public void chooseRecommendedItem(String recommendedItemName) {
+        $x(format(ADD_TO_CART_RECOMMENDED_ITEM_BUTTON, recommendedItemName)).
+                shouldBe(visible, durationInSeconds("default_timeout_in_seconds")).click();
     }
 }
