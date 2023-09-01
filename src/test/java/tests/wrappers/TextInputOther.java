@@ -5,14 +5,16 @@ import static java.lang.String.format;
 
 public class TextInputOther {
     String tag;
-    String dataQa;
+    String attributeName;
+    String attributeValue;
 
-    public TextInputOther(String tag, String dataQa) {
+    public TextInputOther(String tag, String attributeName, String attributeValue) {
         this.tag = tag;
-        this.dataQa = dataQa;
+        this.attributeName = attributeName;
+        this.attributeValue = attributeValue;
     }
 
     public void write(String text) {
-        $x(format("//%s[@data-qa='%s']", tag, dataQa)).setValue(text);
+        $x(format("//%s[@%s='%s']", tag, attributeName, attributeValue)).setValue(text);
     }
 }
