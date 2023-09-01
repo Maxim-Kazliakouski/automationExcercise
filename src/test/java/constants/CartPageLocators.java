@@ -5,4 +5,5 @@ public class CartPageLocators {
     public static final String PRODUCT_QUANTITY = "//h4//a[text()='%s']//..//..//..//button";
     public static final String PROCEED_TO_CHECKOUT_BUTTON = "//a[@class='btn btn-default check_out']";
     public static final String REGISTER_LOGIN_BUTTON = "//u[text()='Register / Login']//ancestor::a";
+    public static final String DELETE_BUTTON = "//a[contains(text(),'%s')]//..//..//..//a[@class='cart_quantity_delete']";
 }
