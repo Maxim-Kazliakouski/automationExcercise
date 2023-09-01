@@ -26,6 +26,6 @@ public class SignUpTest extends BaseTest {
                 .createNewUser(account)
                 .isAccountCreated()
                 .isLoggedAsCreatedAccount()
-                .isAccountDeleted();
+                .deleteAccount();
     }
 }
