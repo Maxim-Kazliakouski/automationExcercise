@@ -17,6 +17,7 @@ public class ContactUsPageSteps {
         contactUsPage
                 .openPage()
                 .isOpened();
+        log.info("Contact page is opened");
         return this;
     }
 
@@ -31,11 +32,13 @@ public class ContactUsPageSteps {
     public ContactUsPageSteps isSuccessNotificationAppeared() {
         contactUsPage
                 .successNotificationMessage();
+        log.info("Successful notification is appeared");
         return this;
     }
 
     public void clickOnHomeButtonAtContactUsPage() {
         contactUsPage
                 .clickOnHomeButton();
+        log.info("Click on 'Home' button");
     }
 }
