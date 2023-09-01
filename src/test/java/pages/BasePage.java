@@ -3,8 +3,6 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import utils.PropertyReader;
 
 import java.io.BufferedReader;
@@ -12,7 +10,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
 import static constants.SignUpLoginPageLocators.ERROR_NOTIFICATION;
@@ -41,8 +38,12 @@ public class BasePage {
         return dataArray;
     }
 
-    public void scrollToTheEndOfAPage() {
+    public void scrollToTheEndOfThePage() {
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
+    public void scrollToTheCertainElement(SelenideElement element) {
+        executeJavaScript("arguments[0].scrollIntoView(true);", element);
     }
 
     public void jsClick(SelenideElement element) {
@@ -57,4 +58,3 @@ public class BasePage {
         element.shouldBe(Condition.visible).click();
     }
 }
-
