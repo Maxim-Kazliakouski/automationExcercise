@@ -6,12 +6,14 @@ import dto.OrderCheckout;
 import factories.OrderCheckoutFactory;
 
 import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
+import static constants.CheckOutPageLocators.LIST_OF_ADDRESS_DETAILS;
 
 public class OrderCheckoutPage {
 
     public OrderCheckout getDataFromCreatedAccount() {
         OrderCheckout orderCheckout = OrderCheckoutFactory.setData();
-        ElementsCollection list = $$x("//ul[@id='address_delivery']//li");
+        ElementsCollection list = $$x(LIST_OF_ADDRESS_DETAILS);
         int i = 0;
         for (SelenideElement string : list) {
             if (!string.getText().equals("YOUR DELIVERY ADDRESS")) {
@@ -48,5 +50,9 @@ public class OrderCheckoutPage {
             }
         }
         return orderCheckout;
+    }
+
+    public void enterText(String text) {
+        $x("//textarea").setValue(text);
     }
 }
