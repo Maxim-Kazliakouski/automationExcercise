@@ -27,7 +27,7 @@ public class CartPage extends BasePage {
     }
 
     public CartPage toSubscribeAtFooterOfTheCartPage(String email) {
-        scrollToTheEndOfAPage();
+        scrollToTheEndOfThePage();
         $x(SUBSCRIPTION).shouldBe(Condition.visible);
         $(SUBSCRIPTION_EMAIL_ADDRESS_FIELD).setValue(email);
         $(SUBSCRIPTION_SUBMIT_BUTTON).click();
@@ -41,7 +41,7 @@ public class CartPage extends BasePage {
     public ArrayList<String> getListOfAddingProducts() {
         ElementsCollection addingProducts = $$x(LIST_OF_ADDED_PRODUCTS);
         ArrayList<String> addedProducts = new ArrayList<>();
-        log.info("The list off adding products:");
+        log.info("The list of adding products:");
         for (SelenideElement eachAddingProduct : addingProducts) {
             log.info(eachAddingProduct.getText());
             addedProducts.add(eachAddingProduct.getText());
