@@ -26,10 +26,10 @@ public class ContactUsPage extends BasePage{
     }
 
     public void createEmail(EmailBody emailBody) {
-        new TextInputOther("input", "name").write(emailBody.getName());
-        new TextInputOther("input", "email").write(emailBody.getEmail());
-        new TextInputOther("input", "subject").write(emailBody.getSubject());
-        new TextInputOther("textarea", "message").write(emailBody.getTextMessage());
+        new TextInputOther("input", "data-qa", "name").write(emailBody.getName());
+        new TextInputOther("input", "data-qa","email").write(emailBody.getEmail());
+        new TextInputOther("input", "data-qa","subject").write(emailBody.getSubject());
+        new TextInputOther("textarea", "data-qa","message").write(emailBody.getTextMessage());
         SelenideElement fileInput = $x("//input[@type='file']").setValue(emailBody.getUploadingFile());
         fileInput.uploadFile(new File(emailBody.getUploadingFile()));
         $x(CONTACT_US_SUBMIT_BUTTON).click();
