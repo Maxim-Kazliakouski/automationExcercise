@@ -6,15 +6,17 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 import steps.*;
 import tests.base.TestListener;
 import utils.PropertyReader;
 
+
+import java.io.File;
+import java.io.IOException;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.clearBrowserCache;
@@ -33,11 +35,22 @@ public class BaseTest {
     public CartPageSteps cartPageSteps;
     public ProductsDetailsPageSteps productsDetailsPageSteps;
     public OrderCheckoutSteps orderCheckoutSteps;
+    public PaymentPageSteps paymentPageSteps;
 
     String username;
     String password;
     public static String caseID;
     public static String testCaseName;
+
+//    @BeforeSuite
+//    public void preconditionBeforeAllTests() {
+//        log.info("Clearing folder before suite....");
+//        //clearing folders before starting tests...
+//        clearFolder(PropertyReader.getProperty("downloadFolderPath"));
+//        log.info("Download folder cleared successfully");
+//        clearFolder(PropertyReader.getProperty("screenshotFolder"));
+//        log.info("Screenshot folder cleared successfully");
+//    }
 
     @BeforeMethod
     public void init() {
@@ -69,20 +82,25 @@ public class BaseTest {
 
         Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
 //
-//            Configuration.browser = PropertyReader.getProperty("browser");
+//      Configuration.browser = PropertyReader.getProperty("browser");
         Configuration.headless = Boolean.parseBoolean(PropertyReader.getProperty("headless"));
-        Configuration.timeout = 10000;
-
+        Configuration.timeout = 5000;
+        // timeout for full page loading (see on document.readyState in console, 120000 = 2 min)
+        Configuration.pageLoadTimeout = 120000;
         Configuration.reportsFolder = "target/screenshots";
-//        Configuration.browserSize = "1920x1080";
+        Configuration.savePageSource = false;
+        Configuration.downloadsFolder = PropertyReader.getProperty("downloadFolderPath");
+//      Configuration.browserSize = "1920x1080";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
-//       Configuration.remote = "http://localhost:4444/wd/hub";
-//        options.addExtensions(new File("D:\\automationExcercise\\adblocker.com.crx"));
+//      Configuration.remote = "http://localhost:4444/wd/hub";
 
-//        options.addArguments("--headless");
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--disable-infobars");
-        chromeOptions.addArguments("--disable-password-manager-reauthentication");
+//        chromeOptions.addArguments("disable-infobars"); // disabling infobars
+//        chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-gpu"); // applicable to windows os only
+        chromeOptions.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+//        chromeOptions.addArguments("--disable-password-manager-reauthentication");
         switch (PropertyReader.getProperty("os")) {
             case ("windows"):
                 chromeOptions.addArguments("--user-data-dir=");
@@ -92,13 +110,8 @@ public class BaseTest {
                 chromeOptions.addArguments("--profile-directory=Profile 1");
                 break;
         }
-//        chromeOptions.addArguments("--profile-directory=Profile 1");
-
         capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-
-
         Configuration.browserCapabilities = capabilities;
-
         // create objects...
         mainPageSteps = new MainPageSteps();
         signUpPageSteps = new SignUpPageSteps();
@@ -110,11 +123,13 @@ public class BaseTest {
         cartPageSteps = new CartPageSteps();
         orderCheckoutSteps = new OrderCheckoutSteps();
         productsDetailsPageSteps = new ProductsDetailsPageSteps();
+        paymentPageSteps = new PaymentPageSteps();
         open("/");
         clearBrowserLocalStorage();
         clearBrowserCookies();
         clearBrowserCache();
         getWebDriver().manage().window().maximize();
+        refresh();
     }
 
     @AfterMethod
@@ -136,6 +151,19 @@ public class BaseTest {
                 break;
         }
         return filePath;
+    }
+
+    @AfterSuite
+    public void postConditionAfterAllTests() {
+        log.info("The end of performing tests in suite....");
+    }
+
+    public void clearFolder(String path) {
+        try {
+            FileUtils.cleanDirectory(new File(path));
+        } catch (IOException e) {
+            log.error("Unable to clear the folder: " + e.getMessage());
+        }
     }
 
 //    @AfterAll
