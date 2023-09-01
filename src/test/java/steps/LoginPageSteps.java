@@ -31,5 +31,6 @@ public class LoginPageSteps {
         signUpLoginPage
                 .checkErrorNotification(notificationText)
                 .getCssValue($x(format(ERROR_NOTIFICATION, notificationText)), "color");
+        log.info("Notification color has been checked!");
     }
 }
