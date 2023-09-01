@@ -31,9 +31,11 @@ public class SignUpLoginPage extends BasePage{
     public void createNewAccount(Account account) {
         username = account.getName();
         signUp(username, account.getEmail());
+        log.info(format("Email --> %s", account.getEmail()));
         $x(SECOND_PHASE_PAGE_MARKER).shouldBe(Condition.visible);
         new RadioButton("Title").select(account.getGender());
         new TextInputLabel("Password").write(account.getPassword());
+        log.info(format("Password --> %s", account.getPassword()));
         new Dropdown("Date of Birth").select("days", account.getDayOfBirth());
         new Dropdown("Date of Birth").select("months", account.getMonthOfBirth());
         new Dropdown("Date of Birth").select("years", account.getYearOfBirth());
@@ -60,6 +62,10 @@ public class SignUpLoginPage extends BasePage{
         $x(format(LOGGED_USER_NAME, username)).shouldBe(Condition.visible);
     }
 
+    public void checkLoggedAccount(String username) {
+        $x(format(LOGGED_USER_NAME, username)).shouldBe(Condition.visible);
+    }
+
     public void deleteCratedAccount() {
         $x(DELETE_ACCOUNT_BUTTON).click();
         $x(ACCOUNT_DELETED_PAGE_MARKER).shouldBe(Condition.visible);
@@ -67,16 +73,16 @@ public class SignUpLoginPage extends BasePage{
     }
 
     public void login(String email, String password) {
-        new TextInputOther("input", "login-email").write(email);
-        new TextInputOther("input", "login-password").write(password);
+        new TextInputOther("input", "data-qa","login-email").write(email);
+        new TextInputOther("input", "data-qa","login-password").write(password);
 //        $x(LOGIN_EMAIL_FIELD).sendKeys(email);
 //        $x(LOGIN_PASSWORD_FIELD).sendKeys(password);
         $x(LOGIN_BUTTON).click();
     }
 
     public void signUp(String name, String email) {
-        new TextInputOther("input", "signup-name").write(name);
-        new TextInputOther("input", "signup-email").write(email);
+        new TextInputOther("input", "data-qa","signup-name").write(name);
+        new TextInputOther("input", "data-qa","signup-email").write(email);
         $x(SIGN_UP_BUTTON).click();
     }
 
