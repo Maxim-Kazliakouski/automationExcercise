@@ -3,15 +3,14 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import dto.ProductReview;
 import lombok.extern.log4j.Log4j2;
-import utils.PropertyReader;
+import tests.wrappers.TextInputOther;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Locale;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static constants.MainPageLocators.PRODUCTS_PAGE_MARKER;
 import static constants.ProductsPageLocators.*;
@@ -31,7 +30,7 @@ public class ProductsPage extends BasePage {
         $x(PRODUCTS_PAGE_MARKER).shouldBe(Condition.visible);
     }
 
-    public ArrayList<String> getProductsList() {
+    public static ArrayList<String> getProductsList() {
         ElementsCollection products = $$x(PRODUCTS_LIST);
         ArrayList<String> productsList = new ArrayList<>();
         for (SelenideElement productName : products) {
@@ -81,7 +80,7 @@ public class ProductsPage extends BasePage {
     public ProductsPage addProduct(String productName) {
         $x(format(PRODUCT_VIEW_BUTTON, productName)).scrollIntoView(false);
         $x(format(PRODUCT_NAME, productName)).hover();
-        SelenideElement addToCartButton = $x(format(ADD_TO_CART, productName)).shouldBe(visible, Duration.ofSeconds(5));
+        SelenideElement addToCartButton = $x(format(ADD_TO_CART, productName)).shouldBe(visible, durationInSeconds("default_timeout_in_seconds"));
         jsClick(addToCartButton);
         return this;
     }
@@ -94,5 +93,16 @@ public class ProductsPage extends BasePage {
     public ProductsPage continuingShoppingFromModalWindowAfterAddingProduct() {
         $x(CONTINUE_SHOPPING_BUTTON).shouldBe(visible, durationInSeconds("default_timeout_in_seconds")).click();
         return this;
+    }
+
+    public ProductsPage createReview(ProductReview productReview) {
+        new TextInputOther("input", "id", "name").write(productReview.getName());
+        new TextInputOther("input", "id", "email").write(productReview.getEmail());
+        new TextInputOther("textarea", "name", "review").write(productReview.getTextReview());
+        return this;
+    }
+
+    public String gettingSuccessMessage() {
+        return $x(SUCCESS_CREATING_REVIEW_MESSAGE).shouldBe(visible).getText();
     }
 }
