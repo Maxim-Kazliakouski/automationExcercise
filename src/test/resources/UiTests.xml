@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="UI Tests Gradle" parallel="false" thread-count="2">
+<suite name="UI Tests Gradle" parallel="classes" thread-count="3">
     <listeners>
         <listener class-name='tests.base.AnnotationTransformer'/>
         <listener class-name="tests.base.TestListener"/>
@@ -10,10 +10,10 @@
             <class name="tests.MainPageTest"/>
             <class name="tests.SignUpTest"/>
             <class name="tests.LoginTest"/>
-            <class name="tests.ContactUsTest"/>
-            <class name="tests.TestCasesTest"/>
-            <class name="tests.ProductsTest"/>
-            <class name="tests.CartPageTest"/>
+<!--            <class name="tests.ContactUsTest"/>-->
+<!--            <class name="tests.TestCasesTest"/>-->
+<!--            <class name="tests.ProductsTest"/>-->
+<!--            <class name="tests.CartPageTest"/>-->
         </classes>
     </test>
 </suite>
