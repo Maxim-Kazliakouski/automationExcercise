@@ -29,4 +29,10 @@ public class MainPageLocators {
     public static final String SUBSCRIPTION_EMAIL_ADDRESS_FIELD = "#susbscribe_email";
     public static final String SUBSCRIPTION_SUBMIT_BUTTON = "#subscribe";
     public static final String SUCCESS_SUBSCRIBE_NOTIFICATION = "//div[@id='success-subscribe']/div[text()='You have been successfully subscribed!']";
+    public static final String RECOMMENDED_ITEMS_HEADER = "//h2[text()='recommended items']";
+    public static final String ADD_TO_CART_RECOMMENDED_ITEM_BUTTON = "//div[@class='recommended_items']//p[text()='%s']//../a";
+    // category locators
+    public static final String CATEGORY_LOCATOR = "//a[contains(@href,'%s')]";
+    public static final String SUBCATEGORY_LOCATOR = "//a[contains(@href,'%s')]//..//..//..//a[text()='%s ']";
+    public static final String PRODUCT_HEADER = "//div[@class='features_items']/h2";
 }
