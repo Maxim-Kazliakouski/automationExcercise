@@ -26,19 +26,23 @@ dependencies {
     implementation 'io.github.bonigarcia:webdrivermanager:5.5.2'
 }
 
-tasks.register("UI tests", Test) {
-    description("Launching UI tests...")
-    useTestNG() {
-        suites "src/test/resources/UItests.xml"
-    }
-    testLogging {
-        events "started", "passed", "skipped", "failed"
-        exceptionFormat "full"
-        showStandardStreams = true
+//tasks.register("UI tests", Test) {
+//    description("Launching UI tests...")
+//    useTestNG() {
+//        suites "src/test/resources/UItests.xml"
+//        maxParall
+//    }
+//    testLogging {
+//        events "started", "passed", "skipped", "failed"
+//        exceptionFormat "full"
+//        showStandardStreams = true
+//    }
+//}
+test {
+    clean
+    useTestNG {
+        suites 'src/test/resources/UItests.xml'
+        parallel 'classes'
+        threadCount 3
     }
 }
-//test {
-////    maxParallelForks(3)
-//    systemProperty 'threadcount', '3'
-//    useTestNG()
-//}
