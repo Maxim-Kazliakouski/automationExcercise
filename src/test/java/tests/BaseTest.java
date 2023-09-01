@@ -42,15 +42,32 @@ public class BaseTest {
     public static String caseID;
     public static String testCaseName;
 
-//    @BeforeSuite
-//    public void preconditionBeforeAllTests() {
-//        log.info("Clearing folder before suite....");
-//        //clearing folders before starting tests...
-//        clearFolder(PropertyReader.getProperty("downloadFolderPath"));
-//        log.info("Download folder cleared successfully");
-//        clearFolder(PropertyReader.getProperty("screenshotFolder"));
-//        log.info("Screenshot folder cleared successfully");
+//        public void clearingCacheCookie() {
+//        clearBrowserLocalStorage();
+//        clearBrowserCookies();
+//        clearBrowserCache();
+//        refresh();
 //    }
+
+    @BeforeSuite
+    public void preconditionBeforeAllTests() {
+        log.info("Clearing folder before suite....");
+        //clearing folders before starting tests...
+        switch (PropertyReader.getProperty("os")) {
+            case ("windows"):
+                clearFolder(PropertyReader.getProperty("downloadFolderPathWindows"));
+                log.info("Download folder cleared successfully");
+                clearFolder(PropertyReader.getProperty("screenshotFolderWindows"));
+                log.info("Screenshot folder cleared successfully");
+                break;
+            case ("macos"):
+                clearFolder(PropertyReader.getProperty("downloadFolderPathMacOS"));
+                log.info("Download folder cleared successfully");
+                clearFolder(PropertyReader.getProperty("screenshotFolderMacOS"));
+                log.info("Screenshot folder cleared successfully");
+                break;
+        }
+    }
 
     @BeforeMethod
     public void init() {
@@ -81,10 +98,10 @@ public class BaseTest {
 //      capabilities.setCapability("videoName", format("%s.mp4", testCaseName));
 
         Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
-//
+
 //      Configuration.browser = PropertyReader.getProperty("browser");
-        Configuration.headless = Boolean.parseBoolean(PropertyReader.getProperty("headless"));
-        Configuration.timeout = 5000;
+//        Configuration.headless = Boolean.parseBoolean(PropertyReader.getProperty("headless"));
+        Configuration.timeout = 10000;
         // timeout for full page loading (see on document.readyState in console, 120000 = 2 min)
         Configuration.pageLoadTimeout = 120000;
         Configuration.reportsFolder = "target/screenshots";
@@ -93,23 +110,28 @@ public class BaseTest {
 //      Configuration.browserSize = "1920x1080";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
 //      Configuration.remote = "http://localhost:4444/wd/hub";
-
         ChromeOptions chromeOptions = new ChromeOptions();
-//        chromeOptions.addArguments("disable-infobars"); // disabling infobars
-//        chromeOptions.addArguments("--headless");
-        chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.addArguments("--disable-gpu"); // applicable to windows os only
-        chromeOptions.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-//        chromeOptions.addArguments("--disable-password-manager-reauthentication");
         switch (PropertyReader.getProperty("os")) {
             case ("windows"):
-                chromeOptions.addArguments("--user-data-dir=");
+//                chromeOptions.addArguments("--user-data-dir=C:\\Users\\Selecty\\AppData\\Local\\Google\\Chrome\\User Data");
+//                chromeOptions.addArguments("--profile-directory=Default");
                 break;
             case ("macos"):
                 chromeOptions.addArguments("--user-data-dir=/Volumes/Work/browser_profiles");
                 chromeOptions.addArguments("--profile-directory=Profile 1");
                 break;
         }
+        //        chromeOptions.addExtensions(new File("D:\\automationExcercise\\src\\test\\java\\Extensions\\123.crx"));
+//      chromeOptions.addArguments("disable-infobars"); // disabling infobars
+        chromeOptions.addArguments("--headless");
+//      chromeOptions.addArguments("--disable-password-manager-reauthentication");
+//        chromeOptions.addArguments("--no-sandbox");
+//        chromeOptions.addArguments("--remote-allow-origins=*");
+//        chromeOptions.addArguments("--disable-gpu"); // applicable to windows os only
+//        chromeOptions.addArguments("chrome.switches", "--disable-extensions");
+//        chromeOptions.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+//        chromeOptions.addArguments("--disable-password-manager-reauthentication");
+
         capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         Configuration.browserCapabilities = capabilities;
         // create objects...
@@ -124,12 +146,8 @@ public class BaseTest {
         orderCheckoutSteps = new OrderCheckoutSteps();
         productsDetailsPageSteps = new ProductsDetailsPageSteps();
         paymentPageSteps = new PaymentPageSteps();
-        open("/");
-        clearBrowserLocalStorage();
-        clearBrowserCookies();
-        clearBrowserCache();
+        open();
         getWebDriver().manage().window().maximize();
-        refresh();
     }
 
     @AfterMethod
@@ -147,7 +165,7 @@ public class BaseTest {
                 filePath = "/Volumes/Work/automationExcercise/fileForUploading.txt";
                 break;
             case ("windows"):
-                filePath = "D\\automationExcercise\\fileForUploading.txt";
+                filePath = "D:\\automationExcercise\\fileForUploading.txt";
                 break;
         }
         return filePath;
