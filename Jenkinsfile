@@ -25,7 +25,7 @@ pipeline {
         stage('Prepare Selenoid: starting containers') {
             steps {
                 bat "docker pull selenoid/$BROWSER"
-                bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start"
+                bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start --vnc"
                 bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid-ui start"
                 bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid status"
                 bat "curl http://localhost:4444/status"
@@ -60,6 +60,17 @@ pipeline {
                 // failed, record the test results and archive the jar file.
                 success {
                     junit '**/target/surefire-reports/TEST-*.xml'
+                }
+            }
+        }
+
+        stage('Stopping and deleting containers') {
+                steps {
+                    script {
+                            bat "docker stop selenoid"
+                            bat "docker rm selenoid"
+                            bat "docker stop selenoid-ui"
+                            bat "docker rm selenoid-ui"
                 }
             }
         }
