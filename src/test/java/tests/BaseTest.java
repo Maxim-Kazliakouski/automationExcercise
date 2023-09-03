@@ -9,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.ITestListener;
 import org.testng.annotations.*;
 import steps.*;
 import tests.base.TestListener;
@@ -129,16 +130,25 @@ public class BaseTest {
 //        Configuration.browserCapabilities = capabilities;
 
         //for selenoid
-        Configuration.remote = "http://localhost:4444/wd/hub";
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1920x1080";
         DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setCapability("browserName", PropertyReader.getProperty("browser"));
+//        capabilities.setCapability("browserVersion", PropertyReader.getProperty("browserVersion"));
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
-                "enableVideo", true,
+                "enableVideo", Boolean.parseBoolean(PropertyReader.getProperty("videoTestRecord")),
                 "enableLog", true
         ));
+        capabilities.setCapability("logName", "my-cool-log.log");
+        capabilities.setCapability("videoScreenSize", "1920x1080");
+        capabilities.setCapability("videoName", format("%s.mp4", "test-case"));
+        Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
+        Configuration.timeout = 10000;
+        Configuration.reportsFolder = "target/screenshots";
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+        Configuration.remote = "http://localhost:4444/wd/hub";
         Configuration.browserCapabilities = capabilities;
+        open();
+        getWebDriver().manage().window().maximize();
 
         // create objects...
         mainPageSteps = new MainPageSteps();
