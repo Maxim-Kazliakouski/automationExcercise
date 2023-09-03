@@ -104,6 +104,7 @@ public class ProductsTest extends BaseTest {
                 Map.entry("product1", "Men Tshirt"),
                 Map.entry("product2", "Stylish Dress"));
         mainPageSteps
+                .openPage()
                 .isMainPageOpened()
                 .clickOnTab("Products");
         productsPageSteps
@@ -138,6 +139,7 @@ public class ProductsTest extends BaseTest {
                 Map.entry("product2", "Stylish Dress"));
         Payment payment = PaymentFactory.getPayment();
         mainPageSteps
+                .openPage()
                 .isMainPageOpened()
                 .clickOnTab("Signup / Login");
         signUpPageSteps
@@ -175,6 +177,7 @@ public class ProductsTest extends BaseTest {
         String password = "123";
         String name = "max";
         mainPageSteps
+                .openPage()
                 .isMainPageOpened()
                 .clickOnTab("Signup / Login");
         loginPageSteps
