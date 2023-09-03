@@ -85,57 +85,61 @@ public class BaseTest {
 //            password = System.getProperty("PASSWORD", PropertyReader.getProperty("qase.password"));
 
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
 
 //        System.setProperty("webdriver.http.factory", "jdk-http-client");
 //        capabilities.setCapability("browserName", PropertyReader.getProperty("browser"));
 //        capabilities.setCapability("browserVersion", PropertyReader.getProperty("browserVersion"));
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", Boolean.parseBoolean(PropertyReader.getProperty("videoTestRecord")),
-                "enableLog", true
-        ));
-      capabilities.setCapability("logName", "my-cool-log.log");
-      capabilities.setCapability("videoScreenSize", "1920x1080");
-      capabilities.setCapability("videoName", format("%s.mp4", testCaseName));
+//        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+//                "enableVNC", true,
+//                "enableVideo", Boolean.parseBoolean(PropertyReader.getProperty("videoTestRecord")),
+//                "enableLog", true
+//        ));
+//      capabilities.setCapability("logName", "my-cool-log.log");
+//      capabilities.setCapability("videoScreenSize", "1920x1080");
+//      capabilities.setCapability("videoName", format("%s.mp4", testCaseName));
 
-        Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
+//        Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
 
 //      Configuration.browser = PropertyReader.getProperty("browser");
 //        Configuration.headless = Boolean.parseBoolean(PropertyReader.getProperty("headless"));
-        Configuration.timeout = 10000;
+//        Configuration.timeout = 10000;
         // timeout for full page loading (see on document.readyState in console, 120000 = 2 min)
-        Configuration.pageLoadTimeout = 120000;
-        Configuration.reportsFolder = "target/screenshots";
-        Configuration.savePageSource = false;
+//        Configuration.pageLoadTimeout = 120000;
+//        Configuration.reportsFolder = "target/screenshots";
+//        Configuration.savePageSource = false;
 //        Configuration.downloadsFolder = PropertyReader.getProperty("downloadFolderPathWindows");
 //      Configuration.browserSize = "1920x1080";
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
-        Configuration.remote = "http://localhost:4444/wd/hub";
-        ChromeOptions chromeOptions = new ChromeOptions();
-        switch (PropertyReader.getProperty("os")) {
-            case ("windows"):
+//        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+//        Configuration.remote = "http://localhost:4444/wd/hub";
+//        ChromeOptions chromeOptions = new ChromeOptions();
+//        switch (PropertyReader.getProperty("os")) {
+//            case ("windows"):
 //                chromeOptions.addArguments("--user-data-dir=C:\\Users\\Selecty\\AppData\\Local\\Google\\Chrome\\User Data");
 //                chromeOptions.addArguments("--profile-directory=Default");
-                break;
-            case ("macos"):
-                chromeOptions.addArguments("--user-data-dir=/Volumes/Work/browser_profiles");
-                chromeOptions.addArguments("--profile-directory=Profile 1");
-                break;
-        }
-        //        chromeOptions.addExtensions(new File("D:\\automationExcercise\\src\\test\\java\\Extensions\\123.crx"));
-//      chromeOptions.addArguments("disable-infobars"); // disabling infobars
+//                break;
+//            case ("macos"):
+//                chromeOptions.addArguments("--user-data-dir=/Volumes/Work/browser_profiles");
+//                chromeOptions.addArguments("--profile-directory=Profile 1");
+//                break;
+//        }
 //        chromeOptions.addArguments("--headless");
-//      chromeOptions.addArguments("--disable-password-manager-reauthentication");
-//        chromeOptions.addArguments("--no-sandbox");
-//        chromeOptions.addArguments("--remote-allow-origins=*");
-//        chromeOptions.addArguments("--disable-gpu"); // applicable to windows os only
-//        chromeOptions.addArguments("chrome.switches", "--disable-extensions");
-//        chromeOptions.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-//        chromeOptions.addArguments("--disable-password-manager-reauthentication");
 
-        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+//        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+//        Configuration.browserCapabilities = capabilities;
+
+        //for selenoid
+        Configuration.remote = "http://localhost:4444/wd/hub";
+        Configuration.browser = "chrome";
+        Configuration.browserSize = "1920x1080";
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true,
+                "enableLog", true
+        ));
         Configuration.browserCapabilities = capabilities;
+
         // create objects...
         mainPageSteps = new MainPageSteps();
         signUpPageSteps = new SignUpPageSteps();
