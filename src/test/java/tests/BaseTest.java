@@ -106,10 +106,10 @@ public class BaseTest {
         Configuration.pageLoadTimeout = 120000;
         Configuration.reportsFolder = "target/screenshots";
         Configuration.savePageSource = false;
-        Configuration.downloadsFolder = PropertyReader.getProperty("downloadFolderPath");
+        Configuration.downloadsFolder = PropertyReader.getProperty("downloadFolderPathWindows");
 //      Configuration.browserSize = "1920x1080";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
-//      Configuration.remote = "http://localhost:4444/wd/hub";
+        Configuration.remote = "http://localhost:4444/wd/hub";
         ChromeOptions chromeOptions = new ChromeOptions();
         switch (PropertyReader.getProperty("os")) {
             case ("windows"):
