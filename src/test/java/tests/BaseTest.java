@@ -147,8 +147,6 @@ public class BaseTest {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
         Configuration.remote = "http://localhost:4444/wd/hub";
         Configuration.browserCapabilities = capabilities;
-        open();
-        getWebDriver().manage().window().maximize();
 
         // create objects...
         mainPageSteps = new MainPageSteps();
