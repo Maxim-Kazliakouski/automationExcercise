@@ -46,3 +46,8 @@ test {
         threadCount 3
     }
 }
+//allureServe
+
+//task allureReporting() {
+//        allureServe.exec()
+//}
