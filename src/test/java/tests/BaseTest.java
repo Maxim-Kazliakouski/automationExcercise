@@ -17,10 +17,12 @@ import utils.PropertyReader;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.clearBrowserCache;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static java.lang.String.format;
 
 @Log4j2
 @Listeners(TestListener.class)
@@ -88,14 +90,14 @@ public class BaseTest {
 //        System.setProperty("webdriver.http.factory", "jdk-http-client");
 //        capabilities.setCapability("browserName", PropertyReader.getProperty("browser"));
 //        capabilities.setCapability("browserVersion", PropertyReader.getProperty("browserVersion"));
-//        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-//                "enableVNC", true,
-//                "enableVideo", Boolean.parseBoolean(PropertyReader.getProperty("videoTestRecord")),
-//                "enableLog", true
-//        ));
-//      capabilities.setCapability("logName", "my-cool-log.log");
-//      capabilities.setCapability("videoScreenSize", "1920x1080");
-//      capabilities.setCapability("videoName", format("%s.mp4", testCaseName));
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", Boolean.parseBoolean(PropertyReader.getProperty("videoTestRecord")),
+                "enableLog", true
+        ));
+      capabilities.setCapability("logName", "my-cool-log.log");
+      capabilities.setCapability("videoScreenSize", "1920x1080");
+      capabilities.setCapability("videoName", format("%s.mp4", testCaseName));
 
         Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
 
@@ -106,7 +108,7 @@ public class BaseTest {
         Configuration.pageLoadTimeout = 120000;
         Configuration.reportsFolder = "target/screenshots";
         Configuration.savePageSource = false;
-        Configuration.downloadsFolder = PropertyReader.getProperty("downloadFolderPathWindows");
+//        Configuration.downloadsFolder = PropertyReader.getProperty("downloadFolderPathWindows");
 //      Configuration.browserSize = "1920x1080";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
         Configuration.remote = "http://localhost:4444/wd/hub";
@@ -123,7 +125,7 @@ public class BaseTest {
         }
         //        chromeOptions.addExtensions(new File("D:\\automationExcercise\\src\\test\\java\\Extensions\\123.crx"));
 //      chromeOptions.addArguments("disable-infobars"); // disabling infobars
-        chromeOptions.addArguments("--headless");
+//        chromeOptions.addArguments("--headless");
 //      chromeOptions.addArguments("--disable-password-manager-reauthentication");
 //        chromeOptions.addArguments("--no-sandbox");
 //        chromeOptions.addArguments("--remote-allow-origins=*");
