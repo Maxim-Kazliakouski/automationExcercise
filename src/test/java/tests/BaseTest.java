@@ -9,7 +9,6 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestListener;
 import org.testng.annotations.*;
 import steps.*;
@@ -19,8 +18,6 @@ import utils.PropertyReader;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -76,7 +73,7 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void init() throws MalformedURLException {
+    public void init() {
 
 //        if (Boolean.parseBoolean(PropertyReader.getProperty("api"))) {
 //        } else {
@@ -133,9 +130,6 @@ public class BaseTest {
 //        Configuration.browserCapabilities = capabilities;
 
         //for selenoid
-
-
-
         DesiredCapabilities capabilities = new DesiredCapabilities();
 //        capabilities.setCapability("browserName", PropertyReader.getProperty("browser"));
 //        capabilities.setCapability("browserVersion", PropertyReader.getProperty("browserVersion"));
@@ -152,8 +146,9 @@ public class BaseTest {
         Configuration.reportsFolder = "target/screenshots";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
         Configuration.remote = "http://localhost:4444/wd/hub";
-        RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
-//        Configuration.browserCapabilities = capabilities;
+        Configuration.browser="chrome";
+        Configuration.browserVersion="115.0";
+        Configuration.browserCapabilities = capabilities;
         // create objects...
         mainPageSteps = new MainPageSteps();
         signUpPageSteps = new SignUpPageSteps();
@@ -167,8 +162,7 @@ public class BaseTest {
         productsDetailsPageSteps = new ProductsDetailsPageSteps();
         paymentPageSteps = new PaymentPageSteps();
         open();
-//        getWebDriver().manage().window().maximize();
-        driver.manage().window().maximize();
+        getWebDriver().manage().window().maximize();
     }
 
     @AfterMethod
