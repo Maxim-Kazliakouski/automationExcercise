@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 import static constants.MainPageLocators.TEST_CASES_PAGE_MARKER;
 
-public class TestCasesPage {
+public class TestCasesPage extends BasePage{
 
     public TestCasesPage openPage() {
         open("/test_cases");
