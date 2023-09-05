@@ -24,10 +24,11 @@ pipeline {
     stages {
         stage('Prepare Selenoid: starting containers') {
             steps {
-                bat "docker pull selenoid/$BROWSER"
-                bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start --vnc"
-                bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid-ui start"
-                bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid status"
+                //bat "docker pull selenoid/$BROWSER"
+                //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start --vnc"
+                bat "D://automationExercise//docker-compose up -d
+                //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid-ui start"
+                //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid status"
                 bat "curl http://localhost:4444/status"
             }
         }
@@ -41,7 +42,7 @@ pipeline {
                     try {
 
                         // Get some code from a GitHub repository
-                        git branch: "${params.BRANCH}",  url: 'https://github.com/Maxim-Kazliakouski/automationExcercise.git'
+                        git branch: "${params.BRANCH}",  url: 'https://github.com/Maxim-Kazliakouski/automationExercise.git'
                         // Run Maven on a Unix agent.
                         // sh "mvn clean -Dsurefire.suiteXmlFiles=src/test/resources/chromeLaunchTest.xml \
                         // To run Maven on a Windows agent, use
@@ -67,10 +68,11 @@ pipeline {
         stage('Stopping and deleting containers') {
                 steps {
                     script {
-                            bat "docker stop selenoid"
-                            bat "docker rm selenoid"
-                            bat "docker stop selenoid-ui"
-                            bat "docker rm selenoid-ui"
+                            //bat "docker stop selenoid"
+                            //bat "docker rm selenoid"
+                            //bat "docker stop selenoid-ui"
+                            //bat "docker rm selenoid-ui"
+                            bat "docker ps -aq | xargs docker stop | xargs docker rm"
                 }
             }
         }
