@@ -10,6 +10,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestListener;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 import steps.*;
 import tests.base.TestListener;
@@ -18,11 +19,11 @@ import utils.PropertyReader;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.clearBrowserCache;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static com.codeborne.selenide.WebDriverRunner.*;
 import static java.lang.String.format;
 
 @Log4j2
@@ -73,7 +74,7 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void init() {
+    public void init(ITestResult result) {
 
 //        if (Boolean.parseBoolean(PropertyReader.getProperty("api"))) {
 //        } else {
@@ -135,19 +136,34 @@ public class BaseTest {
 //        capabilities.setCapability("browserVersion", PropertyReader.getProperty("browserVersion"));
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
-                "enableVideo", Boolean.parseBoolean(PropertyReader.getProperty("videoTestRecord")),
-                "enableLog", true
+                "enableVideo", true,
+                "videoName", format(result.getMethod().getMethodName() + ".mp4"),
+                "enableLog", true,
+                "logName", format(result.getMethod().getMethodName() + ".log")
         ));
-        capabilities.setCapability("logName", "my-cool-log.log");
-        capabilities.setCapability("videoScreenSize", "1920x1080");
-        capabilities.setCapability("videoName", format("%s.mp4", "test-case"));
+//        capabilities.setCapability("logName", "my-cool-log.log");
+//
+//        System.out.println("Test case name --> " + result.getMethod().getMethodName());
+//
+//        ChromeOptions options = new ChromeOptions();
+//        Map<String, Object> selenoidOptions = new HashMap<>();
+//        selenoidOptions.put("enableVNC", true);
+//        selenoidOptions.put("enableVideo", true);
+//        selenoidOptions.put("enableLog", true);
+
+//        capabilities.setCapability("logName", "my-cool-log.log");
+//        capabilities.setCapability("videoScreenSize", "1920x1080");
+//        capabilities.setCapability("videoName", format("%s.mp4", "test-case"));
         Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
         Configuration.timeout = 10000;
         Configuration.reportsFolder = "target/screenshots";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
         Configuration.remote = "http://localhost:4444/wd/hub";
-        Configuration.browser="chrome";
-        Configuration.browserVersion="115.0";
+//        Configuration.browser="chrome";
+//        Configuration.browserVersion="115.0";
+
+//        options.setCapability("selenoid:options", selenoidOptions);
+
         Configuration.browserCapabilities = capabilities;
         // create objects...
         mainPageSteps = new MainPageSteps();
@@ -177,10 +193,10 @@ public class BaseTest {
         String filePath = null;
         switch (PropertyReader.getProperty("os")) {
             case ("macos"):
-                filePath = "/Volumes/Work/automationExcercise/fileForUploading.txt";
+                filePath = "/Volumes/Work/automationExercise/fileForUploading.txt";
                 break;
             case ("windows"):
-                filePath = "D:\\automationExcercise\\fileForUploading.txt";
+                filePath = "D:\\automationExercise\\fileForUploading.txt";
                 break;
         }
         return filePath;
