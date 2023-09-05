@@ -8,7 +8,7 @@
     </listeners>
     <test name="Main page tests">
         <classes>
-<!--            <class name="tests.MainPageTest"/>-->
+            <class name="tests.MainPageTest"/>
 <!--            <class name="tests.SignUpTest"/>-->
 <!--            <class name="tests.LoginTest"/>-->
             <class name="tests.ContactUsTest"/>
