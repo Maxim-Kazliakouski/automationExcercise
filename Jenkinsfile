@@ -27,8 +27,8 @@ pipeline {
                 //bat "docker pull selenoid/$BROWSER"
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start --vnc"
                 //bat "D://automationExercise//docker-compose up -d"
-                bat 'docker-compose --version'
                 bat 'docker --version'
+                bat 'docker-compose --version'
                 bat 'docker-compose up -d'
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid-ui start"
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid status"
