@@ -88,7 +88,7 @@ pipeline {
                         jdk: '',
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
-                        results: [[path: 'C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report']]
+                        results: [[path: 'target/allure-results']]
                     ])
                 }
             }
