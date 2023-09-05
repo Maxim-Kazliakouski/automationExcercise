@@ -75,15 +75,15 @@ public class TestListener implements ITestListener {
 
 //    @Override
 //    public void onStart(ITestContext iTestContext) {
-//        String logs = "/Volumes/Work/automationExcercise/target/testsLog.log";
+//        String logs = "/Volumes/Work/automationExercise/target/testsLog.log";
 //        try {
-//            Files.deleteIfExists(Paths.get("/Volumes/Work/automationExcercise/target/testsLog.log"));
+//            Files.deleteIfExists(Paths.get("/Volumes/Work/automationExercise/target/testsLog.log"));
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
 //        try {
-//            FileUtils.forceDelete(new File("/Volumes/Work/automationExcercise/target/screenshots"));
-//            FileUtils.forceDelete(new File("/Volumes/Work/automationExcercise/target/testsLog.log"));
+//            FileUtils.forceDelete(new File("/Volumes/Work/automationExercise/target/screenshots"));
+//            FileUtils.forceDelete(new File("/Volumes/Work/automationExercise/target/testsLog.log"));
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
