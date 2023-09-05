@@ -27,8 +27,7 @@ pipeline {
                 //bat "docker pull selenoid/$BROWSER"
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start --vnc"
                 //bat "D://automationExercise//docker-compose up -d"
-                bat 'docker --version'
-                bat 'docker-compose --version'
+                bat 'docker start nginx'
                 bat 'docker-compose up -d'
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid-ui start"
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid status"
@@ -74,9 +73,12 @@ pipeline {
                     script {
                             //bat "docker stop selenoid"
                             //bat "docker rm selenoid"
-                            //bat "docker stop selenoid-ui"
                             //bat "docker rm selenoid-ui"
-                            bat "docker ps -aq | xargs docker stop | xargs docker rm"
+                            bat "docker stop nginx"
+                            bat "docker stop aerocub-selenoid-ui-1"
+                            bat "docker rm aerocub-selenoid-ui-1"
+                            bat "docker stop aerocub-selenoid-1"
+                            bat "docker rm aerocub-selenoid-1"
                 }
             }
         }
@@ -90,6 +92,7 @@ pipeline {
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'target/allure-results']]
+                        bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//UI_API//allure-report// nginx-server:/var/www/html/REPORT-${BRANCH}-%date%-%time%"
                     ])
                 }
             }
