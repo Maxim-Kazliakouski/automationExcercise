@@ -74,7 +74,7 @@ pipeline {
                             //bat "docker stop selenoid"
                             //bat "docker rm selenoid"
                             //bat "docker rm selenoid-ui"
-                            bat "docker stop nginx"
+                            //bat "docker stop nginx"
                             bat "docker stop aerocub-selenoid-ui-1"
                             bat "docker rm aerocub-selenoid-ui-1"
                             bat "docker stop aerocub-selenoid-1"
