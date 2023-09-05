@@ -95,7 +95,7 @@ pipeline {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'target/allure-results']]
                     ])
-                    bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/REPORT-${BRANCH}-%TIME: =-1%"
+                    bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/REPORT-${BRANCH}-%DATE%-%TIME: =0%"
                 }
             }
         }
