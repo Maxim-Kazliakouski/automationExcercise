@@ -33,10 +33,10 @@ public class BasePage {
         String txtFilePath = null;
         switch (PropertyReader.getProperty("os")) {
             case ("windows"):
-                txtFilePath = "D:\\automationExcercise\\src\\test\\java\\tests\\testData\\productsList.txt";
+                txtFilePath = "D:\\automationExercise\\src\\test\\java\\tests\\testData\\productsList.txt";
                 break;
             case ("macos"):
-                txtFilePath = "/Volumes/Work/automationExcercise/src/test/java/tests/testData/productsList.txt";
+                txtFilePath = "/Volumes/Work/automationExercise/src/test/java/tests/testData/productsList.txt";
                 break;
         }
         ArrayList<String> dataArray = new ArrayList<>();
