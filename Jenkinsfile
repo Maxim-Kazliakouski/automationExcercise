@@ -28,8 +28,8 @@ pipeline {
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start --vnc"
                 //bat "D://automationExercise//docker-compose up -d"
                 bat 'docker start nginx'
-                bat "docker exec -it -u 0 nginx sh -c 'service nginx start'"
-                bat "docker exec -it -u 0 nginx sh -c 'service nginx status'"
+                bat "winpty docker exec -it -u 0 nginx sh -c 'service nginx start'"
+                bat "winpty docker exec -it -u 0 nginx sh -c 'service nginx status'"
                 bat 'docker-compose up -d'
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid-ui start"
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid status"
