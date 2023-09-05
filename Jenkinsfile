@@ -92,8 +92,8 @@ pipeline {
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'target/allure-results']]
-                        bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//UI_API//allure-report// nginx-server:/var/www/html/REPORT-${BRANCH}-%date%-%time%"
                     ])
+                    bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//UI_API//allure-report// nginx-server:/var/www/html/REPORT-${BRANCH}-%date%-%time%"
                 }
             }
         }
