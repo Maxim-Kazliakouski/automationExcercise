@@ -64,7 +64,7 @@ pipeline {
                 // failed, record the test results and archive the jar file.
                 success {
                 //junit '**/target/surefire-reports/TEST-*.xml'
-                junit 'build/test-results/test/**/TEST-*.xml'
+                junit '**/build/test-results/test/**/TEST-*.xml'
                 }
             }
         }

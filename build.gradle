@@ -47,6 +47,9 @@ test {
         threadCount 3
     }
 }
+allure {
+    aspectjweaver = true
+}
 //allureServe
 
 //task allureReporting() {
