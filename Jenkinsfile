@@ -25,7 +25,7 @@ pipeline {
         stage('Clearing video, logs and allure-results folder...') {
             steps {
                     bat 'C:'
-                    bat 'cd C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//allure-results'
+                    bat 'cd target//allure-results'
                     bat 'pwd'
                     //bat 'rm -rf *'
             }
@@ -38,10 +38,13 @@ pipeline {
                 //bat "docker pull selenoid/$BROWSER"
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start --vnc"
                 //bat "D://automationExercise//docker-compose up -d"
-                bat 'docker start nginx'
-                bat 'docker exec -u 0 nginx sh -c "service nginx start"'
-                bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                bat 'docker-compose up -d'
+
+                //bat 'docker start nginx'
+                //bat 'docker exec -u 0 nginx sh -c "service nginx start"'
+                //bat 'docker exec -u 0 nginx sh -c "service nginx status"'
+                //bat 'docker-compose up -d'
+
+
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid-ui start"
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid status"
                 bat "curl http://localhost:4444/status"
