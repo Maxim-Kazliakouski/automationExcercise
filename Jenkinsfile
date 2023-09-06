@@ -24,10 +24,9 @@ pipeline {
     stages {
         stage('Clearing video, logs and allure-results folder...') {
             steps {
-                    echo 'Going to the allure-results:'
-                    'cd target/allure-results'
-                    bat 'pwd'
-                    //bat 'rm -rf *'
+                    dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\allure-results') {
+                        deleteDir()
+                    }
             }
         }
 
