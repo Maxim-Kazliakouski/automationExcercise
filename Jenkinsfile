@@ -24,9 +24,10 @@ pipeline {
     stages {
         stage('Clearing video, logs and allure-results folder...') {
             steps {
-                    //bat 'C:'
+                    bat 'C:'
                     bat 'cd C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//allure-results'
-                    bat 'rm -rf *'
+                    bat 'pwd'
+                    //bat 'rm -rf *'
             }
         }
 
