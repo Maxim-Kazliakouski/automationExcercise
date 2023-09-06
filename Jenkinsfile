@@ -27,7 +27,7 @@ pipeline {
                     echo 'Going to the C:'
                     bat 'C:'
                     echo 'Going to the allure-results:'
-                    bat 'cd target\\allure-results'
+                    bat 'cd target/allure-results'
                     bat 'pwd'
                     //bat 'rm -rf *'
             }
