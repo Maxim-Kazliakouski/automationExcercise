@@ -25,7 +25,7 @@ pipeline {
         stage('Clearing video, logs and allure-results folder...') {
             steps {
                     echo 'Going to the allure-results:'
-                    cd target/allure-results
+                    'cd target/allure-results'
                     bat 'pwd'
                     //bat 'rm -rf *'
             }
