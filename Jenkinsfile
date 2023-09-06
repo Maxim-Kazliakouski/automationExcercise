@@ -22,6 +22,16 @@ pipeline {
     }
 
     stages {
+        stage('Clearing video, logs and allure-results folder...') {
+            steps {
+                    //bat 'C:'
+                    bat 'cd C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//allure-results'
+                    bat 'rm -rf *'
+            }
+        }
+
+
+
         stage('Prepare Selenoid: starting containers') {
             steps {
                 //bat "docker pull selenoid/$BROWSER"
