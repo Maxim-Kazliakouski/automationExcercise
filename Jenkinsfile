@@ -27,6 +27,12 @@ pipeline {
                     dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\allure-results') {
                         deleteDir()
                     }
+                    dir('D:\\docker\\logs') {
+                        deleteDir()
+                    }
+                    dir('D:\\docker\\video') {
+                        deleteDir()
+                    }
             }
         }
 
