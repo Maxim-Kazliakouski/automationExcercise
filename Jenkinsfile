@@ -1,4 +1,4 @@
-def dateTime = '%TIME: =0%'
+def dateTime = %date%
 pipeline {
     agent any
 
