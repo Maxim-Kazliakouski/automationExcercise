@@ -18,23 +18,11 @@ pipeline {
         selectedValue: 'NONE',
         sortMode: 'NONE',
         tagFilter: '*',
-        type: 'PT_BRANCH' )
+        type: 'PT_BRANCH',
+        date: '%date%')
     }
 
     stages {
-
-        stage('Create Date Variable') {
-          steps {
-            script {
-              def date = LocalDateTime.now()
-              def formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-              env.CURRENT_DATE = formattedDate
-              echo "Current Date: ${env.CURRENT_DATE}"
-            }
-          }
-        }
-
-
         stage('Clearing video, logs and allure-results folders...') {
             steps {
                     dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\allure-results') {
@@ -53,6 +41,13 @@ pipeline {
 
         stage('Prepare Selenoid: starting containers') {
             steps {
+
+                script {
+                    // Store the formatted date in the variable 'now'
+                    def now = new Date().format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
+                    println now  // Print the value of 'now'
+                }
+
                 //bat "docker pull selenoid/$BROWSER"
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start --vnc"
                 //bat "D://automationExercise//docker-compose up -d"
@@ -60,7 +55,7 @@ pipeline {
                 bat 'docker start nginx'
                 bat 'docker exec -u 0 nginx sh -c "service nginx start"'
                 bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/${env.CURRENT_DATE}'
+                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/111_${now}'
                 //bat 'docker-compose up -d'
 
 
