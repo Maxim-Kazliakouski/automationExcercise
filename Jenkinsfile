@@ -1,3 +1,4 @@
+def dateTime = "%DATE%-%TIME: =0%"
 pipeline {
     agent any
 
@@ -47,7 +48,6 @@ pipeline {
                 bat 'docker start nginx'
                 bat 'docker exec -u 0 nginx sh -c "service nginx start"'
                 bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                def dateTime = "%DATE%-%TIME: =0%"
                 bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/${dateTime}"'
                 //bat 'docker-compose up -d'
 
