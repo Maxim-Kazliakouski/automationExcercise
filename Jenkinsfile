@@ -1,5 +1,5 @@
 def now = new Date()
-println now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
+println now.format("HH--mm", TimeZone.getTimeZone('UTC+03'))
 pipeline {
     agent any
 
