@@ -116,7 +116,7 @@ pipeline {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'target/allure-results']]
                     ])
-                    def dateTime = "%DATE%-%TIME: =0%"
+                    //def dateTime = "%DATE%-%TIME: =0%"
                     //bat 'docker exec -u 0 nginx sh -c "service nginx status"'
                     bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/${dateTime}"'
                     //bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/report-%DATE%-%TIME: =0%/${BRANCH}"
