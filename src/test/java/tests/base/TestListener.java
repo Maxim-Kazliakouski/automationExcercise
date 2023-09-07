@@ -1,6 +1,7 @@
 package tests.base;
 
 import adapters.ProjectAPI;
+import io.qameta.allure.TmsLink;
 import lombok.extern.log4j.Log4j2;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -36,7 +37,8 @@ public class TestListener implements ITestListener {
         log.info(format("========================= FINISHED TEST CASE --> '%s'; Duration: %ss =========================%n", iTestResult.getMethod().getMethodName(), getExecutionTime(iTestResult)));
         if (testRun && iTestResult.getStatus() == 1) {
             ProjectAPI api = new ProjectAPI();
-            api.setStatus("passed", codeProject, testRunID, caseID, getExecutionTime(iTestResult));
+            String caseID = (iTestResult.getMethod().getConstructorOrMethod().getMethod().getAnnotation(TmsLink.class).value()).substring(5);
+            api.setStatus("failed", codeProject, testRunID, caseID, getExecutionTime(iTestResult));
         }
     }
 
@@ -47,6 +49,7 @@ public class TestListener implements ITestListener {
         log.error(iTestResult.getThrowable().getMessage());
         if (testRun && iTestResult.getStatus() == 2) {
             ProjectAPI api = new ProjectAPI();
+            String caseID = (iTestResult.getMethod().getConstructorOrMethod().getMethod().getAnnotation(TmsLink.class).value()).substring(5);
             api.setStatus("failed", codeProject, testRunID, caseID, getExecutionTime(iTestResult));
         }
     }
@@ -58,7 +61,8 @@ public class TestListener implements ITestListener {
         log.error(iTestResult.getThrowable().getMessage());
         if (testRun && iTestResult.getStatus() == 4) {
             ProjectAPI api = new ProjectAPI();
-            api.setStatus("skipped", codeProject, testRunID, caseID, getExecutionTime(iTestResult));
+            String caseID = (iTestResult.getMethod().getConstructorOrMethod().getMethod().getAnnotation(TmsLink.class).value()).substring(5);
+            api.setStatus("failed", codeProject, testRunID, caseID, getExecutionTime(iTestResult));
         }
     }
 
