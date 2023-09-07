@@ -45,8 +45,7 @@ pipeline {
                     // Store the formatted date in the variable 'now'
                     //def now = new Date().format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
                     //println now  // Print the value of 'now'
-                    def timestamp="%date%"
-                    println timestamp
+                    bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/111-${now}"'
 
                 }
 
@@ -57,7 +56,7 @@ pipeline {
                 bat 'docker start nginx'
                 bat 'docker exec -u 0 nginx sh -c "service nginx start"'
                 bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/111-$(timestamp)"'
+                //bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/111-$(timestamp)"'
                 //bat 'docker-compose up -d'
 
 
