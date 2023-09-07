@@ -1,4 +1,4 @@
-def DATE = 'qwerty'
+def date = "report_%DATE%-%TIME: =0%"
 pipeline {
     agent any
 
@@ -48,7 +48,7 @@ pipeline {
                 bat 'docker start nginx'
                 bat 'docker exec -u 0 nginx sh -c "service nginx start"'
                 bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/${DATE}"'
+                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/${date}"'
                 //bat 'docker-compose up -d'
 
 
