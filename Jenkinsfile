@@ -1,4 +1,3 @@
-def now = "%date%"
 pipeline {
     agent any
 
@@ -23,6 +22,19 @@ pipeline {
     }
 
     stages {
+
+        stage('Create Date Variable') {
+          steps {
+            script {
+              def date = LocalDate.now()
+              def formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+              env.CURRENT_DATE = formattedDate
+              echo "Current Date: ${env.CURRENT_DATE}"
+            }
+          }
+        }
+
+
         stage('Clearing video, logs and allure-results folders...') {
             steps {
                     dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\allure-results') {
@@ -48,7 +60,7 @@ pipeline {
                 bat 'docker start nginx'
                 bat 'docker exec -u 0 nginx sh -c "service nginx start"'
                 bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/${now}'
+                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/${env.CURRENT_DATE}'
                 //bat 'docker-compose up -d'
 
 
