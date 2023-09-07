@@ -41,12 +41,17 @@ pipeline {
         stage('Prepare Selenoid: starting containers') {
             steps {
 
-                script {
-                    // Store the formatted date in the variable 'now'
-                    def now = new Date().format("HH:mm", TimeZone.getTimeZone('UTC'))
-                    println now  // Print the value of 'now'
-                    sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${now}'"
-                }
+script {
+    // Store the current time in the given time zone
+    def calendar = Calendar.getInstance(TimeZone.getTimeZone('UTC'))
+    calendar.add(Calendar.HOUR_OF_DAY, 3) // Add 3 hours
+
+    // Format the updated time as HH:mm
+    def now = calendar.format("HH:mm")
+
+    println now // Print the value of 'now'
+    sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${now}'"
+}
 
                 //bat "docker pull selenoid/$BROWSER"
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start --vnc"
