@@ -43,9 +43,9 @@ pipeline {
 
                 script {
                     // Store the formatted date in the variable 'now'
-                    def now = new Date().format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
+                    def now = new Date().format("HH:mm", TimeZone.getTimeZone('UTC'))
                     println now  // Print the value of 'now'
-                    bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/111-${now}"'
+                    bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/qwerty_${now}"'
 
                 }
 
