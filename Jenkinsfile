@@ -40,18 +40,17 @@ pipeline {
 
         stage('Prepare Selenoid: starting containers') {
             steps {
+                    script {
+                            // Store the current time in the given time zone
+                            def calendar = Calendar.getInstance(TimeZone.getTimeZone('UTC'))
+                            calendar.add(Calendar.HOUR_OF_DAY, 3) // Add 3 hours
 
-script {
-    // Store the current time in the given time zone
-    def calendar = Calendar.getInstance(TimeZone.getTimeZone('UTC'))
-    calendar.add(Calendar.HOUR_OF_DAY, 3) // Add 3 hours
-
-    // Format the updated time as HH:mm
-    def now = calendar.format("dd-MM-yyyy--HH:mm")
-
-    println now // Print the value of 'now'
-    sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${now}'"
-}
+                            // Format the updated time as HH:mm
+                            def now = calendar.format("dd-MM-yyyy---HH:mm")
+                            sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}'"
+                            sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}/video'"
+                            sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}/logs'"
+                    }
 
                 //bat "docker pull selenoid/$BROWSER"
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start --vnc"
@@ -60,8 +59,7 @@ script {
                 bat 'docker start nginx'
                 bat 'docker exec -u 0 nginx sh -c "service nginx start"'
                 bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                //bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/111-$(timestamp)"'
-                //bat 'docker-compose up -d'
+                bat 'docker-compose up -d'
 
 
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid-ui start"
@@ -128,12 +126,10 @@ script {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'target/allure-results']]
                     ])
-                    //def dateTime = "%DATE%-%TIME: =0%"
-                    //bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                    bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/${dateTime}"'
-                    //bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/report-%DATE%-%TIME: =0%/${BRANCH}"
-                    //bat "docker cp C://docker//video nginx:/var/www/html/report-%DATE%-%TIME: =0%/${BRANCH}/video"
-                    //bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//targetreport/testsLog.log nginx:/var/www/html/report-%DATE%-%TIME: =0%/${BRANCH}/logs"
+                    //sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}'"
+                    sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/${BRANCH}_${now}"
+                    sh "docker cp C://docker//video nginx:/var/www/html/${BRANCH}_${now}/video"
+                    sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//testsLog.log nginx:/var/www/html/${BRANCH}_${now}/logs"
                 }
             }
         }
