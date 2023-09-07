@@ -43,8 +43,11 @@ pipeline {
 
                 script {
                     // Store the formatted date in the variable 'now'
-                    def now = new Date().format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
-                    println now  // Print the value of 'now'
+                    //def now = new Date().format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
+                    //println now  // Print the value of 'now'
+                    timestamp=$(date +%F_%T)
+                    println timestamp
+
                 }
 
                 //bat "docker pull selenoid/$BROWSER"
@@ -54,7 +57,7 @@ pipeline {
                 bat 'docker start nginx'
                 bat 'docker exec -u 0 nginx sh -c "service nginx start"'
                 bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/111_$(date +"%Y-%m-%d")/"'
+                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/111-$(timestamp)"'
                 //bat 'docker-compose up -d'
 
 
