@@ -1,4 +1,4 @@
-def now = ${GROOVY,script = "String.format('%tF %<tH:%<tM', java.time.LocalDateTime.now())"}
+def now = java.time.LocalDate.now()
 println now
 pipeline {
     agent any
