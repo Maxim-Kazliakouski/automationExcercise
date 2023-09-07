@@ -45,7 +45,7 @@ pipeline {
                     // Store the formatted date in the variable 'now'
                     //def now = new Date().format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
                     //println now  // Print the value of 'now'
-                    timestamp=%date%
+                    timestamp='%date%'
                     println timestamp
 
                 }
