@@ -22,7 +22,7 @@ pipeline {
     }
 
     stages {
-        stage('Clearing video, logs and allure-results folder...') {
+        stage('Clearing video, logs and allure-results folders...') {
             steps {
                     dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\allure-results') {
                         deleteDir()
@@ -114,7 +114,9 @@ pipeline {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'target/allure-results']]
                     ])
-                    bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/REPORT-${BRANCH}-%DATE%-%TIME: =0%"
+                    bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/report-%DATE%-%TIME: =0%/${BRANCH}"
+                    bat "docker cp C://docker//video nginx:/var/www/html/report-%DATE%-%TIME: =0%/${BRANCH}/video"
+                    bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//targetreport/testsLog.log nginx:/var/www/html/report-%DATE%-%TIME: =0%/${BRANCH}/logs"
                 }
             }
         }
