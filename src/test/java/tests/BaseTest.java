@@ -7,23 +7,19 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import steps.*;
 import tests.base.TestListener;
 import utils.PropertyReader;
 
-
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.*;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static java.lang.String.format;
 
 @Log4j2
@@ -76,15 +72,8 @@ public class BaseTest {
     @BeforeMethod
     public void init(ITestResult result) {
 
-//        if (Boolean.parseBoolean(PropertyReader.getProperty("api"))) {
-//        } else {
-//      getting test case ID
-//            Collection<String> caseIDs = scenario.getSourceTagNames();
-//            for (String eachCaseID : caseIDs) {
-//                caseID = eachCaseID.substring(12);
-//            }
-//            username = System.getProperty("USERNAME", PropertyReader.getProperty("qase.username"));
-//            password = System.getProperty("PASSWORD", PropertyReader.getProperty("qase.password"));
+        username = System.getProperty("USERNAME", PropertyReader.getProperty("qase.username"));
+        password = System.getProperty("PASSWORD", PropertyReader.getProperty("qase.password"));
 
 
 //        DesiredCapabilities capabilities = new DesiredCapabilities();
