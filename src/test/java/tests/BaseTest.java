@@ -145,6 +145,7 @@ public class BaseTest {
 //        capabilities.setCapability("videoName", format("%s.mp4", "test-case"));
         Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
         Configuration.timeout = 10000;
+        Configuration.pageLoadTimeout = 120000;
         Configuration.reportsFolder = "target/screenshots";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
         Configuration.remote = "http://localhost:4444/wd/hub";
