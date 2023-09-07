@@ -1,5 +1,5 @@
-def now = new Date()
-println now.format("HH--mm", TimeZone.getTimeZone('UTC+03'))
+def now = ${GROOVY,script = "String.format('%tF %<tH:%<tM', java.time.LocalDateTime.now())"}
+println now
 pipeline {
     agent any
 
@@ -49,7 +49,7 @@ pipeline {
                 bat 'docker start nginx'
                 bat 'docker exec -u 0 nginx sh -c "service nginx start"'
                 bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/report_${now}"'
+                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/max+${now}"'
                 //bat 'docker-compose up -d'
 
 
