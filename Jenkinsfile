@@ -26,7 +26,7 @@ pipeline {
         stage('Create Date Variable') {
           steps {
             script {
-              def date = java.LocalDateTime.now()
+              def date = LocalDateTime.now()
               def formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
               env.CURRENT_DATE = formattedDate
               echo "Current Date: ${env.CURRENT_DATE}"
