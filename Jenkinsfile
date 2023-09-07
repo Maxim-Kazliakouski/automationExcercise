@@ -128,7 +128,7 @@ pipeline {
                     ])
                     //sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}'"
                     sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/${BRANCH}_${now}"
-                    sh "docker cp C://docker//video nginx:/var/www/html/${BRANCH}_${now}/video"
+                    sh "docker cp D://docker//video nginx:/var/www/html/${BRANCH}_${now}/video"
                     sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//testsLog.log nginx:/var/www/html/${BRANCH}_${now}/logs"
                 }
             }
