@@ -24,6 +24,7 @@ public class TestRunsChecker {
             if (count != 0) {
                 int testRunID = result.getResult().entities.get(0).getId();
                 projectAPI.deleteTestRun(PropertyReader.getProperty("codeProject"), testRunID);
+                log.info("<----> Test run has been deleted! <---->");
                 System.out.println("<----> Test run has been deleted! <---->");
             } else {
                 System.out.println("There is no created test runs");
