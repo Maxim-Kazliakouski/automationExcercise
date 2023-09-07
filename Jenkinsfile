@@ -48,8 +48,8 @@ pipeline {
             steps {
                     script {
                             sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}'"
-                            sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}/video'"
-                            sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}/logs'"
+                            //sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}/video'"
+                            //sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}/logs'"
                     }
 
                 //bat "docker pull selenoid/$BROWSER"
