@@ -18,8 +18,7 @@ pipeline {
         selectedValue: 'NONE',
         sortMode: 'NONE',
         tagFilter: '*',
-        type: 'PT_BRANCH',
-        date: '%date%')
+        type: 'PT_BRANCH')
     }
 
     stages {
