@@ -130,19 +130,7 @@ public class BaseTest {
                 "enableLog", true,
                 "logName", format(result.getMethod().getMethodName() + ".log")
         ));
-//        capabilities.setCapability("logName", "my-cool-log.log");
-//
-//        System.out.println("Test case name --> " + result.getMethod().getMethodName());
-//
-//        ChromeOptions options = new ChromeOptions();
-//        Map<String, Object> selenoidOptions = new HashMap<>();
-//        selenoidOptions.put("enableVNC", true);
-//        selenoidOptions.put("enableVideo", true);
-//        selenoidOptions.put("enableLog", true);
-
-//        capabilities.setCapability("logName", "my-cool-log.log");
 //        capabilities.setCapability("videoScreenSize", "1920x1080");
-//        capabilities.setCapability("videoName", format("%s.mp4", "test-case"));
         Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
         Configuration.timeout = 10000;
         Configuration.pageLoadTimeout = 120000;
@@ -152,7 +140,6 @@ public class BaseTest {
 //        Configuration.browser="chrome";
 //        Configuration.browserVersion="115.0";
 
-//        options.setCapability("selenoid:options", selenoidOptions);
 
         Configuration.browserCapabilities = capabilities;
         // create objects...
