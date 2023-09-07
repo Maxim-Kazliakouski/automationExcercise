@@ -53,11 +53,11 @@ pipeline {
                     }
 
                 //bat "docker pull selenoid/$BROWSER"
-                bat 'docker start nginx'
-                bat 'docker exec -u 0 nginx sh -c "service nginx start"'
-                bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                bat 'docker-compose up -d'
-                bat "curl http://localhost:4444/status"
+                //bat 'docker start nginx'
+                //bat 'docker exec -u 0 nginx sh -c "service nginx start"'
+                //bat 'docker exec -u 0 nginx sh -c "service nginx status"'
+                //bat 'docker-compose up -d'
+                //bat "curl http://localhost:4444/status"
             }
         }
 
