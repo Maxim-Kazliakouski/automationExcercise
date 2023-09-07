@@ -38,7 +38,7 @@ public class TestListener implements ITestListener {
         if (testRun && iTestResult.getStatus() == 1) {
             ProjectAPI api = new ProjectAPI();
             String caseID = (iTestResult.getMethod().getConstructorOrMethod().getMethod().getAnnotation(TmsLink.class).value()).substring(5);
-            api.setStatus("failed", codeProject, testRunID, caseID, getExecutionTime(iTestResult));
+            api.setStatus("passed", codeProject, testRunID, caseID, getExecutionTime(iTestResult));
         }
     }
 
@@ -62,7 +62,7 @@ public class TestListener implements ITestListener {
         if (testRun && iTestResult.getStatus() == 4) {
             ProjectAPI api = new ProjectAPI();
             String caseID = (iTestResult.getMethod().getConstructorOrMethod().getMethod().getAnnotation(TmsLink.class).value()).substring(5);
-            api.setStatus("failed", codeProject, testRunID, caseID, getExecutionTime(iTestResult));
+            api.setStatus("skipped", codeProject, testRunID, caseID, getExecutionTime(iTestResult));
         }
     }
 
