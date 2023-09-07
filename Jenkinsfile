@@ -1,4 +1,4 @@
-dev DATE = 'qwerty'
+def DATE = 'qwerty'
 pipeline {
     agent any
 
