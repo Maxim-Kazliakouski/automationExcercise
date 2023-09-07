@@ -122,6 +122,7 @@ pipeline {
                     sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/${BRANCH}_${now}"
                     sh "docker cp D://docker//video nginx:/var/www/html/${BRANCH}_${now}/video"
                     sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//testsLog.log nginx:/var/www/html/${BRANCH}_${now}/logs"
+                    sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//screenshots//*.png nginx:/var/www/html/${BRANCH}_${now}/bugs_screenshots"
                 }
             }
         }
