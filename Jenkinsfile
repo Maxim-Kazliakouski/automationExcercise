@@ -1,4 +1,4 @@
-def dateTime = "%DATE%-%TIME: =0%"
+def dateTime = '%DATE%-%TIME: =0%'
 pipeline {
     agent any
 
