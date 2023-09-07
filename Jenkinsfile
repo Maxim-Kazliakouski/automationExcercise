@@ -1,9 +1,9 @@
-                            // Store the current time in the given time zone
-                            def calendar = Calendar.getInstance(TimeZone.getTimeZone('UTC'))
-                            calendar.add(Calendar.HOUR_OF_DAY, 3) // Add 3 hours
+// Store the current time in the given time zone
+def calendar = Calendar.getInstance(TimeZone.getTimeZone('UTC'))
+calendar.add(Calendar.HOUR_OF_DAY, 3) // Add 3 hours
+// Format the updated time as HH:mm
+def now = calendar.format("dd-MM-yyyy---HH:mm")
 
-                            // Format the updated time as HH:mm
-                            def now = calendar.format("dd-MM-yyyy---HH:mm")
 pipeline {
     agent any
 
@@ -53,17 +53,10 @@ pipeline {
                     }
 
                 //bat "docker pull selenoid/$BROWSER"
-                //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start --vnc"
-                //bat "D://automationExercise//docker-compose up -d"
-
                 bat 'docker start nginx'
                 bat 'docker exec -u 0 nginx sh -c "service nginx start"'
                 bat 'docker exec -u 0 nginx sh -c "service nginx status"'
                 bat 'docker-compose up -d'
-
-
-                //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid-ui start"
-                //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid status"
                 bat "curl http://localhost:4444/status"
             }
         }
@@ -126,7 +119,6 @@ pipeline {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'target/allure-results']]
                     ])
-                    //sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}'"
                     sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/${BRANCH}_${now}"
                     sh "docker cp D://docker//video nginx:/var/www/html/${BRANCH}_${now}/video"
                     sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//testsLog.log nginx:/var/www/html/${BRANCH}_${now}/logs"
