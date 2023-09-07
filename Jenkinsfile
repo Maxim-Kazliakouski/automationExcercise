@@ -1,4 +1,5 @@
-def dateTime = '%date%'
+def now = new Date()
+println now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
 pipeline {
     agent any
 
@@ -48,7 +49,7 @@ pipeline {
                 bat 'docker start nginx'
                 bat 'docker exec -u 0 nginx sh -c "service nginx start"'
                 bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/report_${dateTime}"'
+                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/report_${now}"'
                 //bat 'docker-compose up -d'
 
 
