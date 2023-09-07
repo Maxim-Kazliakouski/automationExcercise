@@ -1,3 +1,9 @@
+                            // Store the current time in the given time zone
+                            def calendar = Calendar.getInstance(TimeZone.getTimeZone('UTC'))
+                            calendar.add(Calendar.HOUR_OF_DAY, 3) // Add 3 hours
+
+                            // Format the updated time as HH:mm
+                            def now = calendar.format("dd-MM-yyyy---HH:mm")
 pipeline {
     agent any
 
@@ -41,12 +47,6 @@ pipeline {
         stage('Prepare Selenoid: starting containers') {
             steps {
                     script {
-                            // Store the current time in the given time zone
-                            def calendar = Calendar.getInstance(TimeZone.getTimeZone('UTC'))
-                            calendar.add(Calendar.HOUR_OF_DAY, 3) // Add 3 hours
-
-                            // Format the updated time as HH:mm
-                            def now = calendar.format("dd-MM-yyyy---HH:mm")
                             sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}'"
                             sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}/video'"
                             sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${BRANCH}_${now}/logs'"
