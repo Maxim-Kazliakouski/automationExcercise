@@ -47,7 +47,7 @@ script {
     calendar.add(Calendar.HOUR_OF_DAY, 3) // Add 3 hours
 
     // Format the updated time as HH:mm
-    def now = calendar.format("dd-MM-yyyy"--"HH:mm")
+    def now = calendar.format("dd-MM-yyyy--HH:mm")
 
     println now // Print the value of 'now'
     sh "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${now}'"
