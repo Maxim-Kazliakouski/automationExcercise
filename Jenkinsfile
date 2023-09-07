@@ -54,7 +54,7 @@ pipeline {
                 bat 'docker start nginx'
                 bat 'docker exec -u 0 nginx sh -c "service nginx start"'
                 bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/111_${now}'
+                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/111_${now}"'
                 //bat 'docker-compose up -d'
 
 
