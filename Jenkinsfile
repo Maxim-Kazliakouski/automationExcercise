@@ -1,3 +1,4 @@
+dev DATE = 'qwerty'
 pipeline {
     agent any
 
@@ -40,10 +41,6 @@ pipeline {
 
         stage('Prepare Selenoid: starting containers') {
             steps {
-                    script {
-                    DATE = java.time.LocalDate.now()
-                    println now
-                    }
                 //bat "docker pull selenoid/$BROWSER"
                 //bat "D://UI_API//src//test//resources//ConfigurationManager//cm.exe selenoid start --vnc"
                 //bat "D://automationExercise//docker-compose up -d"
@@ -51,7 +48,7 @@ pipeline {
                 bat 'docker start nginx'
                 bat 'docker exec -u 0 nginx sh -c "service nginx start"'
                 bat 'docker exec -u 0 nginx sh -c "service nginx status"'
-                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/qwe+${DATE}"'
+                bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/111+${DATE}"'
                 //bat 'docker-compose up -d'
 
 
