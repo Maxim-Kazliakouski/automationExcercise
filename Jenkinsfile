@@ -115,7 +115,8 @@ pipeline {
                         results: [[path: 'target/allure-results']]
                     ])
                     def date = "%DATE%-%TIME: =0%"
-                    bat "docker exec -u 0 nginx sh -c 'mkdir /var/www/html/${date}'"
+                    //bat 'docker exec -u 0 nginx sh -c "service nginx status"'
+                    bat 'docker exec -u 0 nginx sh -c "mkdir /var/www/html/${date}"'
                     //bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/report-%DATE%-%TIME: =0%/${BRANCH}"
                     //bat "docker cp C://docker//video nginx:/var/www/html/report-%DATE%-%TIME: =0%/${BRANCH}/video"
                     //bat "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//targetreport/testsLog.log nginx:/var/www/html/report-%DATE%-%TIME: =0%/${BRANCH}/logs"
