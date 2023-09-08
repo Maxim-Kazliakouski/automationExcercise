@@ -16,19 +16,16 @@ import static constants.MainPageLocators.CONTACT_US_PAGE_MARKER;
 @Log4j2
 public class ContactUsPage extends BasePage {
 
-    @Step("Open contact page")
     public ContactUsPage openPage() {
         open("/contact_us");
         return this;
     }
 
-    @Step("Contact page is opened")
     public ContactUsPage isOpened() {
         $x(CONTACT_US_PAGE_MARKER).shouldBe(Condition.visible);
         return this;
     }
 
-    @Step("Crete new email body")
     public void createEmail(EmailBody emailBody) {
         new TextInputOther("input", "data-qa", "name").write(emailBody.getName());
         new TextInputOther("input", "data-qa", "email").write(emailBody.getEmail());
@@ -40,12 +37,10 @@ public class ContactUsPage extends BasePage {
         acceptBrowserNotification();
     }
 
-    @Step("Check successful notification")
     public void successNotificationMessage() {
         $x(SUCCESS_NOTIFICATION).shouldBe(Condition.visible);
     }
 
-    @Step("Click on 'Home' button")
     public void clickOnHomeButton() {
         $(HOME_BUTTON).click();
 //        $x(HOME_PAGE_MARKER).shouldBe(Condition.visible);

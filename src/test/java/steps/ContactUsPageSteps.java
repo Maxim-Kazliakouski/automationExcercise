@@ -13,7 +13,8 @@ public class ContactUsPageSteps {
     public ContactUsPageSteps() {
         contactUsPage = new ContactUsPage();
     }
-    @Step("Open home page")
+
+    @Step("Open contact page")
     public ContactUsPageSteps openPage() {
         contactUsPage
                 .openPage()
@@ -22,7 +23,7 @@ public class ContactUsPageSteps {
         return this;
     }
 
-
+    @Step("Crete new email body")
     public ContactUsPageSteps createNewEmailBody(String absolutePathToUploadFile) {
         EmailBody newEmailBody = EmailBodyFactory.getEmailBody(absolutePathToUploadFile);
         contactUsPage
@@ -31,6 +32,7 @@ public class ContactUsPageSteps {
         return this;
     }
 
+    @Step("Check successful notification")
     public ContactUsPageSteps isSuccessNotificationAppeared() {
         contactUsPage
                 .successNotificationMessage();
@@ -38,6 +40,7 @@ public class ContactUsPageSteps {
         return this;
     }
 
+    @Step("Click on 'Home' button")
     public void clickOnHomeButtonAtContactUsPage() {
         contactUsPage
                 .clickOnHomeButton();
