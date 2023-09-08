@@ -5,6 +5,7 @@
     <listeners>
         <listener class-name='tests.base.AnnotationTransformer'/>
         <listener class-name="tests.base.TestListener"/>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
     </listeners>
     <test name="Main page tests">
         <classes>
