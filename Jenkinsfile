@@ -32,10 +32,6 @@ pipeline {
             steps {
                     dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\allure-results')
                     {
-                        deleteFile('*.png')
-                    }
-                    dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\screenshots')
-                    {
                         deleteDir()
                     }
                     dir('D:\\docker\\logs')
