@@ -8,6 +8,7 @@ import factories.AccountFactory;
 import factories.PaymentFactory;
 import factories.ProductReviewFactory;
 import io.qameta.allure.Description;
+import io.qameta.allure.TmsLink;
 import org.testng.annotations.Test;
 import pages.ProductsPage;
 
@@ -19,6 +20,7 @@ import java.util.Map;
 import static org.testng.Assert.assertEquals;
 
 public class ProductsTest extends BaseTest {
+    @TmsLink("case=13")
     @Test
     @Description("Test for checking all products")
     public void productList() {
@@ -28,6 +30,7 @@ public class ProductsTest extends BaseTest {
                 .comparingProductsList();
     }
 
+    @TmsLink("case=14")
     @Test
     @Description("Test for checking product details page")
     public void productDetailsPage() {
@@ -46,6 +49,7 @@ public class ProductsTest extends BaseTest {
                 .checkingItemDetails(testData);
     }
 
+    @TmsLink("case=15")
     @Test
     @Description("Test for searching product")
     public void searchProduct() {
@@ -56,6 +60,7 @@ public class ProductsTest extends BaseTest {
                 .areSearchedProductsFound(productName);
     }
 
+    @TmsLink("case=16")
     @Test
     @Description("Test for adding products to cart")
     public void addingProductToCart() {
@@ -74,6 +79,7 @@ public class ProductsTest extends BaseTest {
         assertEquals(cartPageSteps.getAddedProducts(), new ArrayList<>(testData.values()));
     }
 
+    @TmsLink("case=17")
     @Test
     @Description("Test for verifying product quantity in Cart")
     public void verifyingProductQuantityInCart() {
@@ -95,6 +101,7 @@ public class ProductsTest extends BaseTest {
         assertEquals(cartPageSteps.getProductQuantity(testData.get("product1")), productQuantity);
     }
 
+    @TmsLink("case=18")
     @Test
     @Description("Place Order: Register while Checkout")
     public void registerAfterOrder() {
@@ -130,6 +137,7 @@ public class ProductsTest extends BaseTest {
                 .deleteAccount();
     }
 
+    @TmsLink("case=19")
     @Test
     @Description("Place Order: Register before Checkout")
     public void registerBeforeOrder() {
@@ -166,6 +174,7 @@ public class ProductsTest extends BaseTest {
                 .deleteAccount();
     }
 
+    @TmsLink("case=20")
     @Test
     @Description("Place Order: Login before Checkout")
     public void loginBeforeCheckOut() {
@@ -202,6 +211,7 @@ public class ProductsTest extends BaseTest {
         assertEquals(paymentPageSteps.gettingSuccessfulMessage(), "Congratulations! Your order has been confirmed!");
     }
 
+    @TmsLink("case=21")
     @Test
     @Description("Search Products and Verify Cart After Login")
     public void searchAndVerifyProducts() {
@@ -214,6 +224,7 @@ public class ProductsTest extends BaseTest {
         assertEquals(ProductsPage.getProductsList(), expectedProducts);
     }
 
+    @TmsLink("case=22")
     @Test
     @Description("Add review on product")
     public void addProductReview() {

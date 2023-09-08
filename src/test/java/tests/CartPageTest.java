@@ -5,6 +5,7 @@ import dto.OrderCheckout;
 import dto.Payment;
 import factories.AccountFactory;
 import factories.PaymentFactory;
+import io.qameta.allure.TmsLink;
 import jdk.jfr.Description;
 import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.Test;
@@ -20,6 +21,7 @@ import static org.testng.Assert.assertEquals;
 @Log4j2
 public class CartPageTest extends BaseTest {
 
+    @TmsLink("case=23")
     @Test
     @Description("Test for checking subscription at cart page")
     public void subscriptionAtCartPage() {
@@ -31,6 +33,7 @@ public class CartPageTest extends BaseTest {
                 .toSubscribe("111@mail.co");
     }
 
+    @TmsLink("case=24")
     @Test
     @Description("Remove Products From Cart")
     public void removeProductsFromCart() {
@@ -53,8 +56,9 @@ public class CartPageTest extends BaseTest {
         assertEquals(cartPageSteps.getAddedProducts().get(0), testData.get("product2"));
     }
 
+    @TmsLink("case=25")
     @Test
-    @Description("Add to cart from Recommended items")
+    @Description("Add products to cart from Recommended items")
     public void addRecommendedItems() {
         List<String> recommendedItems = new ArrayList<>(List.of("Winter Top"));
         mainPageSteps
@@ -70,6 +74,7 @@ public class CartPageTest extends BaseTest {
         assertEquals(cartPageSteps.getAddedProducts(), recommendedItems, "The recommended items in the cart doesn't match!");
     }
 
+    @TmsLink("case=26")
     @Test
     @Description("Download Invoice after purchase order")
     public void downloadInvoiceAfterPurchaseOrder() throws FileNotFoundException {
