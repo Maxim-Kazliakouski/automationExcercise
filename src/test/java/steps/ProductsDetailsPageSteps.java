@@ -1,5 +1,6 @@
 package steps;
 
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import pages.ProductDetailsPage;
 
@@ -13,6 +14,7 @@ public class ProductsDetailsPageSteps {
         productDetailsPage = new ProductDetailsPage();
     }
 
+    @Step("Open product details page")
     public ProductsDetailsPageSteps isProductDetailsPageOpened() {
         productDetailsPage
                 .isOpened();
@@ -20,6 +22,7 @@ public class ProductsDetailsPageSteps {
         return this;
     }
 
+    @Step("Increase product quantity")
     public ProductsDetailsPageSteps increaseProductQuantity(Integer quantity) {
         productDetailsPage
                 .increaseQuantity(quantity);
@@ -27,6 +30,7 @@ public class ProductsDetailsPageSteps {
         return this;
     }
 
+    @Step("Click on add to cart button")
     public ProductsDetailsPageSteps addToCart() {
         productDetailsPage
                 .clickOnAddToCartButton();
@@ -34,6 +38,7 @@ public class ProductsDetailsPageSteps {
         return this;
     }
 
+    @Step("Click on view cart button")
     public void viewCart() {
         productDetailsPage
                 .clickOnViewCartButton();

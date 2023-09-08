@@ -2,6 +2,7 @@ package steps;
 
 import dto.EmailBody;
 import factories.EmailBodyFactory;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import pages.ContactUsPage;
 
@@ -13,6 +14,7 @@ public class ContactUsPageSteps {
         contactUsPage = new ContactUsPage();
     }
 
+    @Step("Open contact page")
     public ContactUsPageSteps openPage() {
         contactUsPage
                 .openPage()
@@ -21,6 +23,7 @@ public class ContactUsPageSteps {
         return this;
     }
 
+    @Step("Crete new email body")
     public ContactUsPageSteps createNewEmailBody(String absolutePathToUploadFile) {
         EmailBody newEmailBody = EmailBodyFactory.getEmailBody(absolutePathToUploadFile);
         contactUsPage
@@ -29,6 +32,7 @@ public class ContactUsPageSteps {
         return this;
     }
 
+    @Step("Check successful notification")
     public ContactUsPageSteps isSuccessNotificationAppeared() {
         contactUsPage
                 .successNotificationMessage();
@@ -36,6 +40,7 @@ public class ContactUsPageSteps {
         return this;
     }
 
+    @Step("Click on 'Home' button")
     public void clickOnHomeButtonAtContactUsPage() {
         contactUsPage
                 .clickOnHomeButton();

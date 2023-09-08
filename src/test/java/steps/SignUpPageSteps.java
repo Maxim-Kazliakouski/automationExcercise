@@ -1,6 +1,7 @@
 package steps;
 
 import dto.Account;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import pages.SignUpLoginPage;
 
@@ -19,6 +20,7 @@ public class SignUpPageSteps {
         return this;
     }
 
+    @Step("Is signup/login page opened")
     public SignUpPageSteps isSignUpLoginPageOpened() {
         signUpLoginPage
                 .isPageOpened();
@@ -26,6 +28,7 @@ public class SignUpPageSteps {
         return this;
     }
 
+    @Step("Create new account")
     public SignUpPageSteps createNewUser(Account newAccount) {
         log.info("Creating new account...");
         signUpLoginPage
@@ -33,6 +36,7 @@ public class SignUpPageSteps {
         return this;
     }
 
+    @Step("Check that new account has been created")
     public SignUpPageSteps isAccountCreated() {
         signUpLoginPage
                 .checkCreatedAccount();
@@ -40,6 +44,7 @@ public class SignUpPageSteps {
         return this;
     }
 
+    @Step("Check that created account is logged")
     public SignUpPageSteps isLoggedAsCreatedAccount() {
         signUpLoginPage
                 .checkLoggedCreatedAccount();
@@ -47,18 +52,21 @@ public class SignUpPageSteps {
         return this;
     }
 
+    @Step("Check that created account '{username}' is logged")
     public void isLoggedAccount(String username) {
         signUpLoginPage
                 .checkLoggedAccount(username);
         log.info("Account has been logged");
     }
 
+    @Step("Delete account")
     public void deleteAccount() {
         signUpLoginPage
                 .deleteCratedAccount();
         log.info("Account has been deleted!");
     }
 
+    @Step("Sign up with the creds: email -> {email}, password -> {password}")
     public SignUpPageSteps signUpWithCreds(String name, String email) {
         signUpLoginPage
                 .signUp(name, email);

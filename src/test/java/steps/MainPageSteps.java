@@ -1,5 +1,6 @@
 package steps;
 
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import pages.BasePage;
 import pages.MainPage;
@@ -22,6 +23,7 @@ public class MainPageSteps {
         basePage = new BasePage();
     }
 
+    @Step("Opening main page...")
     public MainPageSteps openPage() {
         log.info("Opening main page...");
         mainPage
@@ -29,6 +31,7 @@ public class MainPageSteps {
         return this;
     }
 
+    @Step("Main page is opened")
     public MainPageSteps isMainPageOpened() {
         mainPage
                 .isOpened();
@@ -36,11 +39,13 @@ public class MainPageSteps {
         return this;
     }
 
+    @Step("Click on '{tabName}' tab")
     public void clickOnTab(String tabName) {
         $x(format("//li/a[text()=' %s']", tabName)).shouldBe(visible).click();
         log.info(format("Click on '%s' tab", tabName));
     }
 
+    @Step("CLicking on each tab in header...")
     public MainPageSteps clickOnAllHeaderTabs() {
         log.info("CLicking on each tab in header...");
         mainPage
@@ -48,6 +53,7 @@ public class MainPageSteps {
         return this;
     }
 
+    @Step("User '{username}' is logged!")
     public MainPageSteps isUserLogged(String username) {
         mainPage
                 .checkLoginUser(username);
@@ -55,18 +61,21 @@ public class MainPageSteps {
         return this;
     }
 
+    @Step("Logout user")
     public MainPageSteps logout() {
         mainPage
                 .logout();
         return this;
     }
 
+    @Step("User has been logout")
     public void isUserLogout() {
         mainPage
                 .checkThatUserLogout();
         log.info("User has been logout!");
     }
 
+    @Step("Subscribe at the page footer")
     public void toSubscribe(String emailForSubscribing) {
         mainPage
                 .toSubscribeAtFooterOfThePage(emailForSubscribing)
@@ -74,6 +83,7 @@ public class MainPageSteps {
         log.info("Subscribe at the page footer");
     }
 
+    @Step("Click on '{categoryName}' category")
     public MainPageSteps clickOnCategory(String categoryName) {
         mainPage
                 .clickOnCategory(categoryName);
@@ -81,6 +91,7 @@ public class MainPageSteps {
         return this;
     }
 
+    @Step("Click on subcategory '{subcategoryName}'")
     public MainPageSteps clickOnSubcategory(String categoryName, String subcategoryName) {
         mainPage
                 .clickOnSubCategory(categoryName, subcategoryName);
@@ -88,12 +99,14 @@ public class MainPageSteps {
         return this;
     }
 
+    @Step("Check product header")
     public String checkProductHeader() {
         return
                 mainPage
                         .getProductHeader();
     }
 
+    @Step("Scroll to the 'RECOMMENDED ITEMS header...")
     public MainPageSteps scrollToTheRecommendedItemsHeader() {
         log.info("Scroll to the 'RECOMMENDED ITEMS header...'");
         basePage
@@ -101,6 +114,7 @@ public class MainPageSteps {
         return this;
     }
 
+    @Step("Is recommended items visible")
     public MainPageSteps isRecommendedItemsIsVisible() {
         mainPage
                 .checkRecommendedItemsHeader();
@@ -108,11 +122,10 @@ public class MainPageSteps {
         return this;
     }
 
+    @Step("Choose recommended item --> {recommendedItemName}")
     public void chooseRecommendedItem(String recommendedItemName) {
         log.info(format("Choose recommended item --> %s", recommendedItemName));
         mainPage
                 .chooseRecommendedItem(recommendedItemName);
     }
-
-
 }

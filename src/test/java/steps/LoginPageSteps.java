@@ -1,5 +1,6 @@
 package steps;
 
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import pages.MainPage;
 import pages.SignUpLoginPage;
@@ -18,6 +19,7 @@ public class LoginPageSteps {
         signUpLoginPage = new SignUpLoginPage();
     }
 
+    @Step("Login with creds email: {email} and password: {password}")
     public LoginPageSteps loginWithCreds(String email, String password) {
         signUpLoginPage
                 .login(email, password);
@@ -27,6 +29,7 @@ public class LoginPageSteps {
         return this;
     }
 
+    @Step("Check notification color")
     public void checkNotificationAndColor(String notificationText) {
         signUpLoginPage
                 .checkErrorNotification(notificationText)

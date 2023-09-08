@@ -1,6 +1,7 @@
 package steps;
 
 import dto.Payment;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import pages.BasePage;
 import pages.PaymentPage;
@@ -20,6 +21,7 @@ public class PaymentPageSteps {
         basePage = new BasePage();
     }
 
+    @Step("Open payment page")
     public PaymentPageSteps isPaymentPageIsOpened() {
         paymentPage
                 .isOpenedPage();
@@ -27,6 +29,7 @@ public class PaymentPageSteps {
         return this;
     }
 
+    @Step("Creating new payment")
     public PaymentPageSteps createNewPayment(Payment payment) {
         log.info("Creating new payment...");
         paymentPage
@@ -36,18 +39,21 @@ public class PaymentPageSteps {
         return this;
     }
 
+    @Step("Getting successful message")
     public String gettingSuccessfulMessage() {
         return
                 paymentPage
                         .checkingSuccessfulMessage();
     }
 
+    @Step("Getting invoice")
     public String gettingInvoice() throws FileNotFoundException {
         return
                 paymentPage
                         .downloadInvoice();
     }
 
+    @Step("Click on continue button")
     public void clickOnContinueButton() {
         basePage
                 .clickOnButton($x(CONTINUE_BUTTON));
