@@ -30,17 +30,20 @@ pipeline {
     stages {
         stage('Clearing video, screenshots, logs and allure-results folders...') {
             steps {
-                    dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\allure-results') {
-                        deleteDir()
-                    }
+                    dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\allure-results')
                     {
-                    dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\screenshots') {
                         deleteDir()
                     }
-                    dir('D:\\docker\\logs') {
+                    dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\screenshots')
+                    {
                         deleteDir()
                     }
-                    dir('D:\\docker\\video') {
+                    dir('D:\\docker\\logs')
+                    {
+                        deleteDir()
+                    }
+                    dir('D:\\docker\\video')
+                    {
                         deleteDir()
                     }
             }
@@ -125,6 +128,18 @@ pipeline {
                     ])
                 }
             }
+        }
+
+
+        stage('Moving reports and logs to the nginx server') {
+                    steps {
+                        script {
+                                sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/${BRANCH}_${now}"
+                                sh "docker cp D://docker//video nginx:/var/www/html/${BRANCH}_${now}/video"
+                                sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//testsLog.log nginx:/var/www/html/${BRANCH}_${now}/logs"
+                                sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//screenshots nginx:/var/www/html/${BRANCH}_${now}/bugs_screenshots"
+                        }
+                    }
         }
     }
 }
