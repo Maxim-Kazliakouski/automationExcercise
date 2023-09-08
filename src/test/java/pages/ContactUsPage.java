@@ -3,6 +3,7 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import dto.EmailBody;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import tests.wrappers.TextInputOther;
 
@@ -13,33 +14,38 @@ import static constants.ContactUsPageLocators.*;
 import static constants.MainPageLocators.CONTACT_US_PAGE_MARKER;
 
 @Log4j2
-public class ContactUsPage extends BasePage{
+public class ContactUsPage extends BasePage {
 
+    @Step("Open contact page")
     public ContactUsPage openPage() {
         open("/contact_us");
         return this;
     }
 
+    @Step("Contact page is opened")
     public ContactUsPage isOpened() {
         $x(CONTACT_US_PAGE_MARKER).shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Crete new email body")
     public void createEmail(EmailBody emailBody) {
         new TextInputOther("input", "data-qa", "name").write(emailBody.getName());
-        new TextInputOther("input", "data-qa","email").write(emailBody.getEmail());
-        new TextInputOther("input", "data-qa","subject").write(emailBody.getSubject());
-        new TextInputOther("textarea", "data-qa","message").write(emailBody.getTextMessage());
+        new TextInputOther("input", "data-qa", "email").write(emailBody.getEmail());
+        new TextInputOther("input", "data-qa", "subject").write(emailBody.getSubject());
+        new TextInputOther("textarea", "data-qa", "message").write(emailBody.getTextMessage());
         SelenideElement fileInput = $x("//input[@type='file']").setValue(emailBody.getUploadingFile());
         fileInput.uploadFile(new File(emailBody.getUploadingFile()));
         $x(CONTACT_US_SUBMIT_BUTTON).click();
         acceptBrowserNotification();
     }
 
+    @Step("Check successful notification")
     public void successNotificationMessage() {
         $x(SUCCESS_NOTIFICATION).shouldBe(Condition.visible);
     }
 
+    @Step("Click on 'Home' button")
     public void clickOnHomeButton() {
         $(HOME_BUTTON).click();
 //        $x(HOME_PAGE_MARKER).shouldBe(Condition.visible);
