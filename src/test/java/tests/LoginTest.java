@@ -45,7 +45,7 @@ public class LoginTest extends BaseTest {
                 .isUserLogout();
     }
 
-    @TmsLink("11")
+    @TmsLink("case=11")
     @Test
     @Description("Test for checking that there is no ability to register user with existing email")
     public void existingEmail() {
