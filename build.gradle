@@ -52,12 +52,14 @@ dependencies {
 //        showStandardStreams = true
 //    }
 //}
-//allure {
-////    version = '2.11.2'
-//    autoconfigure = true
-//    aspectjweaver = true
-////    allureJavaVersion = LATEST_VERSION
-//}
+allure {
+//    version = '2.11.2'
+    autoconfigure = true
+    aspectjweaver = true
+//    testResultsDir = File("C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\allure-results")
+//    allure.results.directory=build/allure-results
+//    allureJavaVersion = LATEST_VERSION
+}
 
 
 test {
