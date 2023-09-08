@@ -2,11 +2,13 @@ package tests;
 
 import dto.Account;
 import factories.AccountFactory;
+import io.qameta.allure.TmsLink;
 import jdk.jfr.Description;
 import org.testng.annotations.Test;
 
 public class SignUpTest extends BaseTest {
 
+    @TmsLink("case=6")
     @Test
     @Description("Test for checking 'signup/login' page is opened")
     public void openSignUpLoginPage() {
@@ -17,6 +19,7 @@ public class SignUpTest extends BaseTest {
                 .openPage();
     }
 
+    @TmsLink("case=7")
     @Test
     @Description("Test for creating new account")
     public void createNewAccount() {

@@ -1,10 +1,12 @@
 package tests;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.TmsLink;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
+    @TmsLink("case=8")
     @Test
     @Description("Test for checking that created user can log in")
     public void login() {
@@ -17,6 +19,7 @@ public class LoginTest extends BaseTest {
                 .isUserLogged("max");
     }
 
+    @TmsLink("case=9")
     @Test
     @Description("Test for checking that user with invalid creds can't log in")
     public void loginWithInvalidCreds() {
@@ -27,6 +30,7 @@ public class LoginTest extends BaseTest {
                 .checkNotificationAndColor("Your email or password is incorrect!");
     }
 
+    @TmsLink("case=10")
     @Test
     @Description("Test for checking that user has ability to logout")
     public void logout() {
@@ -41,6 +45,7 @@ public class LoginTest extends BaseTest {
                 .isUserLogout();
     }
 
+    @TmsLink("11")
     @Test
     @Description("Test for checking that there is no ability to register user with existing email")
     public void existingEmail() {

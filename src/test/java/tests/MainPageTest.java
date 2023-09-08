@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.TmsLink;
 import jdk.jfr.Description;
 import org.testng.annotations.Test;
 
@@ -19,6 +20,7 @@ public class MainPageTest extends BaseTest {
 //        };
 //    }
 
+    @TmsLink("case=2")
     @Test
     @Description("Test for checking opening main page")
     public void openMainPage() {
@@ -26,6 +28,7 @@ public class MainPageTest extends BaseTest {
                 .openPage();
     }
 
+    @TmsLink("case=3")
     @Test()
     @Description("Test for checking workability all tabs in app header")
     public void checkAllTabsInHeader() {
@@ -34,6 +37,7 @@ public class MainPageTest extends BaseTest {
                 .clickOnAllHeaderTabs();
     }
 
+    @TmsLink("case=4")
     @Test
     @Description("Test for checking subscription at home page")
     public void subscriptionAtMainPage() {
@@ -42,6 +46,7 @@ public class MainPageTest extends BaseTest {
                 .toSubscribe("123@mail.co");
     }
 
+    @TmsLink("case=5")
     @Test
     @Description("View Category Products")
     public void viewCategoryProducts() {
