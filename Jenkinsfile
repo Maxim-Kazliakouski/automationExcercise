@@ -28,7 +28,7 @@ pipeline {
     }
 
     stages {
-        stage('Clearing video, screenshots, logs and allure-results folders...') {
+        stage('Clearing folders: video, screenshots, logs, allure-results') {
             steps {
                     dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\allure-results')
                     {
@@ -44,8 +44,6 @@ pipeline {
                     }
             }
         }
-
-
 
         stage('Prepare Selenoid: starting containers') {
             steps {
@@ -97,7 +95,7 @@ pipeline {
             }
         }
 
-        stage('Stopping and deleting containers') {
+        stage('Stopping and deleting docker containers') {
                 steps {
                     script {
                             //bat "docker stop selenoid"
