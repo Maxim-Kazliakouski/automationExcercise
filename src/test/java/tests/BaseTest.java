@@ -49,25 +49,25 @@ public class BaseTest {
 //        refresh();
 //    }
 
-//    @BeforeSuite
-//    public void preconditionBeforeAllTests() {
-//        log.info("Clearing folder before suite....");
-//        //clearing folders before starting tests...
-//        switch (PropertyReader.getProperty("os")) {
-//            case ("windows"):
-//                clearFolder(PropertyReader.getProperty("downloadFolderPathWindows"));
-//                log.info("Download folder cleared successfully");
-//                clearFolder(PropertyReader.getProperty("screenshotFolderWindows"));
-//                log.info("Screenshot folder cleared successfully");
-//                break;
-//            case ("macos"):
-//                clearFolder(PropertyReader.getProperty("downloadFolderPathMacOS"));
-//                log.info("Download folder cleared successfully");
-//                clearFolder(PropertyReader.getProperty("screenshotFolderMacOS"));
-//                log.info("Screenshot folder cleared successfully");
-//                break;
-//        }
-//    }
+    @BeforeSuite
+    public void preconditionBeforeAllTests() {
+        log.info("Clearing folder before suite....");
+        //clearing folders before starting tests...
+        switch (PropertyReader.getProperty("os")) {
+            case ("windows"):
+                clearFolder(PropertyReader.getProperty("downloadFolderPathWindows"));
+                log.info("Download folder cleared successfully");
+                clearFolder(PropertyReader.getProperty("screenshotFolderWindows"));
+                log.info("Screenshot folder cleared successfully");
+                break;
+            case ("macos"):
+                clearFolder(PropertyReader.getProperty("downloadFolderPathMacOS"));
+                log.info("Download folder cleared successfully");
+                clearFolder(PropertyReader.getProperty("screenshotFolderMacOS"));
+                log.info("Screenshot folder cleared successfully");
+                break;
+        }
+    }
 
     @BeforeMethod
     public void init(ITestResult result) {
