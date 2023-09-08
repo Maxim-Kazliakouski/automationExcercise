@@ -9,6 +9,7 @@ import factories.PaymentFactory;
 import factories.ProductReviewFactory;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
+import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.Test;
 import pages.ProductsPage;
 
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
-
+@Log4j2
 public class ProductsTest extends BaseTest {
     @TmsLink("case=13")
     @Test
@@ -76,6 +77,7 @@ public class ProductsTest extends BaseTest {
                 .clickOnViewCartButton();
         cartPageSteps
                 .isCartPageOpened();
+        log.info("The list of test data:" + new ArrayList<>(testData.values()));
         assertEquals(cartPageSteps.getAddedProducts(), new ArrayList<>(testData.values()));
     }
 
