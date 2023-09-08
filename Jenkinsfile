@@ -28,9 +28,13 @@ pipeline {
     }
 
     stages {
-        stage('Clearing video, logs and allure-results folders...') {
+        stage('Clearing video, screenshots, logs and allure-results folders...') {
             steps {
                     dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\allure-results') {
+                        deleteDir()
+                    }
+                    {
+                    dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\screenshots') {
                         deleteDir()
                     }
                     dir('D:\\docker\\logs') {
@@ -119,12 +123,19 @@ pipeline {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'target/allure-results']]
                     ])
-                    sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/${BRANCH}_${now}"
-                    sh "docker cp D://docker//video nginx:/var/www/html/${BRANCH}_${now}/video"
-                    sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//testsLog.log nginx:/var/www/html/${BRANCH}_${now}/logs"
-                    sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//screenshots nginx:/var/www/html/${BRANCH}_${now}/bugs_screenshots"
                 }
             }
+        }
+
+        stage('Moving reports and logs to the nginx server') {
+                    steps {
+                        script {
+                                sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//allure-report nginx:/var/www/html/${BRANCH}_${now}"
+                                sh "docker cp D://docker//video nginx:/var/www/html/${BRANCH}_${now}/video"
+                                sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//testsLog.log nginx:/var/www/html/${BRANCH}_${now}/logs"
+                                sh "docker cp C://ProgramData//Jenkins//.jenkins//workspace//AutomationExercise//target//screenshots nginx:/var/www/html/${BRANCH}_${now}/bugs_screenshots"
+                        }
+                    }
         }
     }
 }
