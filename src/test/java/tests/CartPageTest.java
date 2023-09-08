@@ -6,7 +6,7 @@ import dto.Payment;
 import factories.AccountFactory;
 import factories.PaymentFactory;
 import io.qameta.allure.TmsLink;
-import jdk.jfr.Description;
+import io.qameta.allure.Description;
 import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.Test;
 

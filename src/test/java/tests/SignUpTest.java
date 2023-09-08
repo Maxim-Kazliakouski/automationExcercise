@@ -3,7 +3,7 @@ package tests;
 import dto.Account;
 import factories.AccountFactory;
 import io.qameta.allure.TmsLink;
-import jdk.jfr.Description;
+import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 
 public class SignUpTest extends BaseTest {

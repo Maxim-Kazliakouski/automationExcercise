@@ -1,7 +1,7 @@
 package tests;
 
 import io.qameta.allure.TmsLink;
-import jdk.jfr.Description;
+import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
@@ -29,7 +29,7 @@ public class MainPageTest extends BaseTest {
     }
 
     @TmsLink("case=3")
-    @Test()
+    @Test
     @Description("Test for checking workability all tabs in app header")
     public void checkAllTabsInHeader() {
         mainPageSteps
