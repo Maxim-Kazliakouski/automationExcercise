@@ -2,6 +2,7 @@ package steps;
 
 import dto.EmailBody;
 import factories.EmailBodyFactory;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import pages.ContactUsPage;
 
@@ -12,7 +13,7 @@ public class ContactUsPageSteps {
     public ContactUsPageSteps() {
         contactUsPage = new ContactUsPage();
     }
-
+    @Step("Open home page")
     public ContactUsPageSteps openPage() {
         contactUsPage
                 .openPage()
