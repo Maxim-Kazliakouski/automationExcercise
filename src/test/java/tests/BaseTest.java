@@ -195,8 +195,8 @@ public class BaseTest {
         return filePath;
     }
 
-    public void assertScreenshots(TestInfo info) {
-        String expectedFileName = info.getTestMethod().get().getName();
+    public void assertScreenshots(ITestResult info) {
+        String expectedFileName = info.getMethod().getMethodName();
         String expectedScreenshotsDir = "src/test/resources/expectedScreenshots";
 
         File actualScreenshot = Selenide.screenshot(OutputType.FILE);
