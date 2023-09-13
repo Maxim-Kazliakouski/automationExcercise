@@ -3,10 +3,18 @@ package tests;
 //import adapters.ProjectAPI;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import com.github.romankh3.image.comparison.ImageComparison;
+import com.github.romankh3.image.comparison.ImageComparisonUtil;
+import com.github.romankh3.image.comparison.model.ImageComparisonResult;
+import com.github.romankh3.image.comparison.model.ImageComparisonState;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.TestInfo;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -14,13 +22,16 @@ import steps.*;
 import tests.base.TestListener;
 import utils.PropertyReader;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static java.lang.String.format;
+import static org.testng.AssertJUnit.assertEquals;
 
 @Log4j2
 @Listeners(TestListener.class)
@@ -39,15 +50,6 @@ public class BaseTest {
 
     String username;
     String password;
-    public static String caseID;
-    public static String testCaseName;
-
-//        public void clearingCacheCookie() {
-//        clearBrowserLocalStorage();
-//        clearBrowserCookies();
-//        clearBrowserCache();
-//        refresh();
-//    }
 
     @BeforeSuite
     public void preconditionBeforeAllTests() {
@@ -132,6 +134,7 @@ public class BaseTest {
         ));
 //        capabilities.setCapability("videoScreenSize", "1920x1080");
         Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
+        Configuration.browserSize = "1920x1080";
         Configuration.timeout = 10000;
         Configuration.pageLoadTimeout = 120000;
         Configuration.reportsFolder = "target/screenshots";
@@ -166,6 +169,19 @@ public class BaseTest {
         }
     }
 
+    @AfterSuite
+    public void postConditionAfterAllTests() {
+        log.info("The end of performing tests in suite....");
+    }
+
+    public void clearFolder(String path) {
+        try {
+            FileUtils.cleanDirectory(new File(path));
+        } catch (IOException e) {
+            log.error("Unable to clear the folder: " + e.getMessage());
+        }
+    }
+
     public String chooseOS() {
         String filePath = null;
         switch (PropertyReader.getProperty("os")) {
@@ -179,17 +195,46 @@ public class BaseTest {
         return filePath;
     }
 
-    @AfterSuite
-    public void postConditionAfterAllTests() {
-        log.info("The end of performing tests in suite....");
+    public void assertScreenshots(TestInfo info) {
+        String expectedFileName = info.getTestMethod().get().getName();
+        String expectedScreenshotsDir = "src/test/resources/expectedScreenshots";
+
+        File actualScreenshot = Selenide.screenshot(OutputType.FILE);
+        File expectedScreenshot = new File(expectedScreenshotsDir + expectedFileName);
+
+        if (!expectedScreenshot.exists()) {
+            addImgToAllure("actual", actualScreenshot);
+            throw new IllegalArgumentException("Can't assert image, because there is no reference. Actual screen can be downloaded from Allure");
+        }
+        BufferedImage expectedImage = ImageComparisonUtil.readImageFromResources(expectedScreenshotsDir + expectedFileName);
+        BufferedImage actualImage = ImageComparisonUtil.readImageFromResources(actualScreenshot.toPath().toString());
+
+        File resultDestinationDir = new File("build/diffs/diff_" + expectedFileName);
+
+        ImageComparison imageComparison = new ImageComparison(expectedImage, actualImage, resultDestinationDir);
+        ImageComparisonResult result = imageComparison.compareImages();
+
+        if (!result.getImageComparisonState().equals(ImageComparisonState.MATCH)) {
+            addImgToAllure("actual", actualScreenshot);
+            addImgToAllure("expected", expectedScreenshot);
+            addImgToAllure("diff", resultDestinationDir);
+        }
+
+        assertEquals(ImageComparisonState.MATCH, result.getImageComparisonState());
     }
 
-    public void clearFolder(String path) {
+    private void addImgToAllure(String name, File file) {
         try {
-            FileUtils.cleanDirectory(new File(path));
+            byte[] image = Files.readAllBytes(file.toPath());
+            saveScreenshots(name, image);
         } catch (IOException e) {
-            log.error("Unable to clear the folder: " + e.getMessage());
+            throw new RuntimeException("Can't read bytes");
         }
+    }
+
+    @Attachment(value = "{name}", type = "image/png")
+    private static byte[] saveScreenshots(String name, byte[] image) {
+        return image;
     }
 
 //    @AfterAll
