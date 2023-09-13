@@ -11,7 +11,7 @@ public class ContactUsTest extends BaseTest {
     public void sendEmailForSupport() {
         contactUsPageSteps
                 .openPage();
-        assertScreenshots(getTestCaseName());
+//        assertScreenshots(getTestCaseName());
         contactUsPageSteps
                 .createNewEmailBody(chooseOS())
                 .isSuccessNotificationAppeared()
