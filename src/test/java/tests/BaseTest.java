@@ -203,11 +203,11 @@ public class BaseTest implements ITestListener {
 
     public void assertScreenshots(String info) {
         String expectedFileName = info + ".png";
-        String expectedScreenshotsDir = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\src\\test\\resources\\";
+        String expectedScreenshotsDir = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\src\\test\\resources\\expectedScreenshots\\";
 
         File actualScreenshot = Selenide.screenshot(OutputType.FILE);
         File expectedScreenshot = new File(expectedScreenshotsDir + expectedFileName);
-
+        log.info("expectedScreenshot" + expectedScreenshot);
         if (!expectedScreenshot.exists()) {
             addImgToAllure("actual", actualScreenshot);
             throw new IllegalArgumentException("Can't assert image, because there is no reference. Actual screen can be downloaded from Allure");
