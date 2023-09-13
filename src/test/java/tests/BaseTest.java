@@ -79,7 +79,7 @@ public class BaseTest implements ITestListener {
     @BeforeMethod
     public void init(ITestResult result) {
         testCaseName = result.getMethod().getMethodName();
-        System.out.println("TEST CASE NAME --> " + testCaseName);
+        log.info("TEST CASE NAME --> " + testCaseName);
         username = System.getProperty("USERNAME", PropertyReader.getProperty("qase.username"));
         password = System.getProperty("PASSWORD", PropertyReader.getProperty("qase.password"));
 
@@ -202,7 +202,7 @@ public class BaseTest implements ITestListener {
     }
 
     public void assertScreenshots(String info) {
-        String expectedScreenshotsDir = "src/test/resources/expectedScreenshots";
+        String expectedScreenshotsDir = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\src\\test\\resources";
 
         File actualScreenshot = Selenide.screenshot(OutputType.FILE);
         File expectedScreenshot = new File(expectedScreenshotsDir + info);
@@ -214,7 +214,8 @@ public class BaseTest implements ITestListener {
         BufferedImage expectedImage = ImageComparisonUtil.readImageFromResources(expectedScreenshotsDir + info);
         BufferedImage actualImage = ImageComparisonUtil.readImageFromResources(actualScreenshot.toPath().toString());
 
-        File resultDestinationDir = new File("build/diffs/diff_" + info);
+        File resultDestinationDir = new File("C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\build\\diffs\\/diff_" + info);
+        log.info("PATH TO SCREENSHOT" + resultDestinationDir);
 
         ImageComparison imageComparison = new ImageComparison(expectedImage, actualImage, resultDestinationDir);
         ImageComparisonResult result = imageComparison.compareImages();
