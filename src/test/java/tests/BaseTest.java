@@ -215,7 +215,7 @@ public class BaseTest implements ITestListener {
         BufferedImage expectedImage = ImageComparisonUtil.readImageFromResources(expectedScreenshotsDir + expectedFileName);
         BufferedImage actualImage = ImageComparisonUtil.readImageFromResources(actualScreenshot.toPath().toString());
 
-        File resultDestinationDir = new File("C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\src\\test\\resources\\screenshotsDiffs\\diff_" + expectedFileName);
+        File resultDestinationDir = new File("C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\src\\test\\resources\\screenshotsDiffs\\" + expectedFileName);
         log.info("PATH TO SCREENSHOT" + resultDestinationDir);
 
         ImageComparison imageComparison = new ImageComparison(expectedImage, actualImage, resultDestinationDir);
