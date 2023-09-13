@@ -15,6 +15,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import steps.*;
@@ -34,7 +35,7 @@ import static org.testng.AssertJUnit.assertEquals;
 
 @Log4j2
 @Listeners(TestListener.class)
-public class BaseTest {
+public class BaseTest implements ITestListener {
     public MainPageSteps mainPageSteps;
     public SignUpPageSteps signUpPageSteps;
     public LoginPageSteps loginPageSteps;
@@ -49,6 +50,11 @@ public class BaseTest {
 
     String username;
     String password;
+    private String testCaseName;
+
+    public String getTestCaseName() {
+        return testCaseName;
+    }
 
     @BeforeSuite
     public void preconditionBeforeAllTests() {
@@ -72,7 +78,8 @@ public class BaseTest {
 
     @BeforeMethod
     public void init(ITestResult result) {
-
+        testCaseName = result.getMethod().getMethodName();
+        System.out.println("TEST CASE NAME --> " + testCaseName);
         username = System.getProperty("USERNAME", PropertyReader.getProperty("qase.username"));
         password = System.getProperty("PASSWORD", PropertyReader.getProperty("qase.password"));
 
@@ -194,21 +201,20 @@ public class BaseTest {
         return filePath;
     }
 
-    public void assertScreenshots(ITestResult info) {
-        String expectedFileName = info.getMethod().getMethodName();
+    public void assertScreenshots(String info) {
         String expectedScreenshotsDir = "src/test/resources/expectedScreenshots";
 
         File actualScreenshot = Selenide.screenshot(OutputType.FILE);
-        File expectedScreenshot = new File(expectedScreenshotsDir + expectedFileName);
+        File expectedScreenshot = new File(expectedScreenshotsDir + info);
 
         if (!expectedScreenshot.exists()) {
             addImgToAllure("actual", actualScreenshot);
             throw new IllegalArgumentException("Can't assert image, because there is no reference. Actual screen can be downloaded from Allure");
         }
-        BufferedImage expectedImage = ImageComparisonUtil.readImageFromResources(expectedScreenshotsDir + expectedFileName);
+        BufferedImage expectedImage = ImageComparisonUtil.readImageFromResources(expectedScreenshotsDir + info);
         BufferedImage actualImage = ImageComparisonUtil.readImageFromResources(actualScreenshot.toPath().toString());
 
-        File resultDestinationDir = new File("build/diffs/diff_" + expectedFileName);
+        File resultDestinationDir = new File("build/diffs/diff_" + info);
 
         ImageComparison imageComparison = new ImageComparison(expectedImage, actualImage, resultDestinationDir);
         ImageComparisonResult result = imageComparison.compareImages();
