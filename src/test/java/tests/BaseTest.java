@@ -202,19 +202,20 @@ public class BaseTest implements ITestListener {
     }
 
     public void assertScreenshots(String info) {
-        String expectedScreenshotsDir = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\src\\test\\resources";
+        String expectedFileName = info + ".png";
+        String expectedScreenshotsDir = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\src\\test\\resources\\";
 
         File actualScreenshot = Selenide.screenshot(OutputType.FILE);
-        File expectedScreenshot = new File(expectedScreenshotsDir + info);
+        File expectedScreenshot = new File(expectedScreenshotsDir + expectedFileName);
 
         if (!expectedScreenshot.exists()) {
             addImgToAllure("actual", actualScreenshot);
             throw new IllegalArgumentException("Can't assert image, because there is no reference. Actual screen can be downloaded from Allure");
         }
-        BufferedImage expectedImage = ImageComparisonUtil.readImageFromResources(expectedScreenshotsDir + info);
+        BufferedImage expectedImage = ImageComparisonUtil.readImageFromResources(expectedScreenshotsDir + expectedFileName);
         BufferedImage actualImage = ImageComparisonUtil.readImageFromResources(actualScreenshot.toPath().toString());
 
-        File resultDestinationDir = new File("C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\build\\diffs\\/diff_" + info);
+        File resultDestinationDir = new File("C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\build\\diffs\\diff_" + expectedFileName);
         log.info("PATH TO SCREENSHOT" + resultDestinationDir);
 
         ImageComparison imageComparison = new ImageComparison(expectedImage, actualImage, resultDestinationDir);
