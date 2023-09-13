@@ -2,9 +2,8 @@ package tests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
-import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.Test;
 import org.testng.ITestResult;
-import org.testng.annotations.Test;
 
 public class ContactUsTest extends BaseTest {
     @TmsLink("case=1")
