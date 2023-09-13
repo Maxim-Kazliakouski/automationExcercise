@@ -10,11 +10,11 @@ public class ContactUsTest extends BaseTest {
     @Description("Test for checking that user can contact with support")
     public void sendEmailForSupport() {
         contactUsPageSteps
-                .openPage();
+                .openPage()
+                .createNewEmailBody(chooseOS())
+                .isSuccessNotificationAppeared();
         assertScreenshots(getTestCaseName());
         contactUsPageSteps
-                .createNewEmailBody(chooseOS())
-                .isSuccessNotificationAppeared()
                 .clickOnHomeButtonAtContactUsPage();
         mainPageSteps
                 .isMainPageOpened();
