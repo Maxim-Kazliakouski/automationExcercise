@@ -83,13 +83,7 @@ public class BaseTest implements ITestListener {
         log.info("TEST CASE NAME --> " + testCaseName);
         username = System.getProperty("USERNAME", PropertyReader.getProperty("qase.username"));
         password = System.getProperty("PASSWORD", PropertyReader.getProperty("qase.password"));
-
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        if (System.getProperty("test").equals("max")) {
-            log.info("VARIABLES THROUGH JENKINS IS WORKED!!!");
-            System.out.println("VARIABLES THROUGH JENKINS IS WORKED!!!");
-        }
-        System.out.println();
         // for local launching tests...
         switch (PropertyReader.getProperty("launchType")) {
             case ("local"):
