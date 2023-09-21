@@ -68,6 +68,8 @@ test {
         suites 'src/test/resources/UItests.xml'
         parallel 'classes'
         threadCount 3
+        System.getProperty("launchType")
+        println("LAUNCH TYPE IS --> " + System.getProperty("launchType"))
     }
 }
 
