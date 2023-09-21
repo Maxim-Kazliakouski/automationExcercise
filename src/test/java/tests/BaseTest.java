@@ -14,6 +14,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -83,74 +84,59 @@ public class BaseTest implements ITestListener {
         username = System.getProperty("USERNAME", PropertyReader.getProperty("qase.username"));
         password = System.getProperty("PASSWORD", PropertyReader.getProperty("qase.password"));
 
-
-//        DesiredCapabilities capabilities = new DesiredCapabilities();
-
-//        System.setProperty("webdriver.http.factory", "jdk-http-client");
-//        capabilities.setCapability("browserName", PropertyReader.getProperty("browser"));
-//        capabilities.setCapability("browserVersion", PropertyReader.getProperty("browserVersion"));
-//        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-//                "enableVNC", true,
-//                "enableVideo", Boolean.parseBoolean(PropertyReader.getProperty("videoTestRecord")),
-//                "enableLog", true
-//        ));
-//      capabilities.setCapability("logName", "my-cool-log.log");
-//      capabilities.setCapability("videoScreenSize", "1920x1080");
-//      capabilities.setCapability("videoName", format("%s.mp4", testCaseName));
-
-//        Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
-
-//      Configuration.browser = PropertyReader.getProperty("browser");
-//        Configuration.headless = Boolean.parseBoolean(PropertyReader.getProperty("headless"));
-//        Configuration.timeout = 10000;
-        // timeout for full page loading (see on document.readyState in console, 120000 = 2 min)
-//        Configuration.pageLoadTimeout = 120000;
-//        Configuration.reportsFolder = "target/screenshots";
-//        Configuration.savePageSource = false;
-//        Configuration.downloadsFolder = PropertyReader.getProperty("downloadFolderPathWindows");
-//      Configuration.browserSize = "1920x1080";
-//        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
-//        Configuration.remote = "http://localhost:4444/wd/hub";
-//        ChromeOptions chromeOptions = new ChromeOptions();
-//        switch (PropertyReader.getProperty("os")) {
-//            case ("windows"):
-//                chromeOptions.addArguments("--user-data-dir=C:\\Users\\Selecty\\AppData\\Local\\Google\\Chrome\\User Data");
-//                chromeOptions.addArguments("--profile-directory=Default");
-//                break;
-//            case ("macos"):
-//                chromeOptions.addArguments("--user-data-dir=/Volumes/Work/browser_profiles");
-//                chromeOptions.addArguments("--profile-directory=Profile 1");
-//                break;
-//        }
-//        chromeOptions.addArguments("--headless");
-
-//        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-//        Configuration.browserCapabilities = capabilities;
-
-        //for selenoid
         DesiredCapabilities capabilities = new DesiredCapabilities();
-//        capabilities.setCapability("browserName", PropertyReader.getProperty("browser"));
-//        capabilities.setCapability("browserVersion", PropertyReader.getProperty("browserVersion"));
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true,
-                "videoName", format(result.getMethod().getMethodName() + ".mp4"),
-                "enableLog", true,
-                "logName", format(result.getMethod().getMethodName() + ".log")
-        ));
-//        capabilities.setCapability("videoScreenSize", "1920x1080");
-        Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
-        Configuration.browserSize = "1920x1080";
-        Configuration.timeout = 10000;
-        Configuration.pageLoadTimeout = 120000;
-        Configuration.reportsFolder = "target/screenshots";
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
-        Configuration.remote = "http://localhost:4444/wd/hub";
-//        Configuration.browser="chrome";
-//        Configuration.browserVersion="115.0";
+        if (System.getProperty("test").equals("max")) {
+            System.out.println("VARIABLES THROUGH JENKINS IS WORKED!!!");
+        }
+        System.out.println();
+        // for local launching tests...
+        switch (PropertyReader.getProperty("launchType")) {
+            case ("local"):
+                Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
+                Configuration.headless = Boolean.parseBoolean(PropertyReader.getProperty("headless"));
+                Configuration.timeout = 10000;
+                //  timeout for full page loading (see on document.readyState in console, 120000 = 2 min)
+                Configuration.pageLoadTimeout = 120000;
+                Configuration.reportsFolder = "target/screenshots";
+                Configuration.savePageSource = false;
+                Configuration.downloadsFolder = PropertyReader.getProperty("downloadFolderPathWindows");
+                Configuration.browserSize = "1920x1080";
+                SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+                ChromeOptions chromeOptions = new ChromeOptions();
+                switch (PropertyReader.getProperty("os")) {
+                    case ("windows"):
+                        chromeOptions.addArguments("--user-data-dir=C:\\Users\\Selecty\\AppData\\Local\\Google\\Chrome\\User Data");
+                        chromeOptions.addArguments("--profile-directory=Default");
+                        break;
+                    case ("macos"):
+                        chromeOptions.addArguments("--user-data-dir=/Volumes/Work/browser_profiles");
+                        chromeOptions.addArguments("--profile-directory=Profile 1");
+                        break;
+                }
+                capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+                Configuration.browserCapabilities = capabilities;
+                break;
+            case ("remote"):
+                //for selenoid
+                capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                        "enableVNC", true,
+                        "enableVideo", true,
+                        "videoName", format(result.getMethod().getMethodName() + ".mp4"),
+                        "enableLog", true,
+                        "logName", format(result.getMethod().getMethodName() + ".log")
+                ));
+                // capabilities.setCapability("videoScreenSize", "1920x1080");
+                Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
+                Configuration.browserSize = "1920x1080";
+                Configuration.timeout = 10000;
+                Configuration.pageLoadTimeout = 120000;
+                Configuration.reportsFolder = "target/screenshots";
+                SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+                Configuration.remote = "http://localhost:4444/wd/hub";
+                Configuration.browserCapabilities = capabilities;
+                break;
+        }
 
-
-        Configuration.browserCapabilities = capabilities;
         // create objects...
         mainPageSteps = new MainPageSteps();
         signUpPageSteps = new SignUpPageSteps();
