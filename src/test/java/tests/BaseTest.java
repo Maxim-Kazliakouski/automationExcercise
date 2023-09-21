@@ -85,7 +85,7 @@ public class BaseTest implements ITestListener {
         password = System.getProperty("PASSWORD", PropertyReader.getProperty("qase.password"));
         DesiredCapabilities capabilities = new DesiredCapabilities();
         // for local launching tests...
-        switch (PropertyReader.getProperty("launchType")) {
+        switch (System.getProperty("launchType")) {
             case ("local"):
                 Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
                 Configuration.headless = Boolean.parseBoolean(PropertyReader.getProperty("headless"));
