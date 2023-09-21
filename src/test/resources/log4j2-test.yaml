@@ -39,8 +39,8 @@ Configuration:
       AppenderRef:
         #        for displaying type info in console
         - ref: console_Appender
-#          level: ERROR
-          level: ALL
+          level: ERROR
+#          level: ALL
         #        for displaying type info in logfile
         - ref: file_Appender
           level: ALL
