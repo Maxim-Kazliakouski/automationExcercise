@@ -61,15 +61,23 @@ allure {
 //    allureJavaVersion = LATEST_VERSION
 }
 
+//System.getProperty("launchType")
+//println("LAUNCH TYPE IS --> " + System.getProperty("launchType"))
+
+//task updateConfigProperties {
+//    String value111 = System.getProperty("launchType");
+//}
 
 test {
+//    dependsOn(updateConfigProperties)
     clean
     useTestNG {
+        systemProperty 'launchType', System.getProperty("launchType")
         suites 'src/test/resources/UItests.xml'
         parallel 'classes'
         threadCount 3
-        System.getProperty("launchType")
-        println("LAUNCH TYPE IS --> " + System.getProperty("launchType"))
+//        System.getProperty("launchType")
+//        println("LAUNCH TYPE IS --> " + System.getProperty("launchType"))
     }
 }
 
