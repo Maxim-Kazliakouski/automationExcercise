@@ -86,6 +86,7 @@ public class BaseTest implements ITestListener {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         if (System.getProperty("test").equals("max")) {
+            log.info("VARIABLES THROUGH JENKINS IS WORKED!!!");
             System.out.println("VARIABLES THROUGH JENKINS IS WORKED!!!");
         }
         System.out.println();
