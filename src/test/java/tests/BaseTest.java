@@ -128,7 +128,7 @@ public class BaseTest implements ITestListener {
                 Configuration.browserSize = "1920x1080";
                 Configuration.timeout = 10000;
                 Configuration.pageLoadTimeout = 120000;
-                Configuration.downloadsFolder = "/home/selenium/Downloads";
+//                Configuration.downloadsFolder = "/home/selenium/Downloads";
                 Configuration.reportsFolder = "target/screenshots";
                 SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
                 Configuration.remote = "http://localhost:4444/wd/hub";
