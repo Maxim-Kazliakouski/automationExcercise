@@ -95,9 +95,9 @@ pipeline {
             }
         }
 
-        stage('Stopping and deleting docker containers') {
-                steps {
-                    script {
+        //stage('Stopping and deleting docker containers') {
+                //steps {
+                    //script {
                             //bat "docker stop selenoid"
                             //bat "docker rm selenoid"
                             //bat "docker rm selenoid-ui"
@@ -107,9 +107,9 @@ pipeline {
                             //bat "docker rm automationexercise-selenoid-ui-1"
                             //bat "docker stop automationexercise-selenoid-1"
                             //bat "docker rm automationexercise-selenoid-1"
-                }
-            }
-        }
+                //}
+            //}
+        //}
 
         stage('Generating Allure report') {
             steps {
