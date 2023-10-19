@@ -100,8 +100,11 @@ public class BaseTest implements ITestListener {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 switch (PropertyReader.getProperty("os")) {
                     case ("windows"):
-                        chromeOptions.addArguments("--user-data-dir=C:\\Users\\Selecty\\AppData\\Local\\Google\\Chrome\\User Data");
-                        chromeOptions.addArguments("--profile-directory=Default");
+                        chromeOptions.addArguments("--disable-gpu");
+                        chromeOptions.addArguments("--no-sandbox");
+                        chromeOptions.addArguments("--disable-dev-shm-usage");
+//                        chromeOptions.addArguments("--user-data-dir=C:\\Users\\Selecty\\AppData\\Local\\Google\\Chrome\\User Data");
+//                        chromeOptions.addArguments("--profile-directory=Default");
                         break;
                     case ("macos"):
                         chromeOptions.addArguments("--user-data-dir=/Volumes/Work/browser_profiles");
