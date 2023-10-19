@@ -154,7 +154,7 @@ public class BaseTest implements ITestListener {
 
 //                capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
-                Configuration.browserCapabilities = capabilities;
+                Configuration.browserCapabilities = options;
                 break;
         }
 
