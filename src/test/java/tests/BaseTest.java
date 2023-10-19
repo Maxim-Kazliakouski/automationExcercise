@@ -27,6 +27,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -116,6 +118,22 @@ public class BaseTest implements ITestListener {
                 break;
             case ("remote"):
                 //for selenoid
+                ChromeOptions options = new ChromeOptions();
+                options.setExperimentalOption("prefs", new HashMap<String, Object>(){
+                    {
+                        put("profile.default_content_settings.popups", 0);
+                        put("download.default_directory", "/home/selenium/Downloads");
+                        put("download.prompt_for_download", false);
+                        put("download.directory_upgrade", true);
+                        put("safebrowsing.enabled", false);
+                        put("plugins.always_open_pdf_externally", true);
+                        put("plugins.plugins_disabled", new ArrayList<String>(){
+                            {
+                                add("Chrome PDF Viewer");
+                            }
+                        });
+                    }
+                });
                 capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                         "enableVNC", true,
                         "enableVideo", true,
@@ -132,6 +150,7 @@ public class BaseTest implements ITestListener {
                 Configuration.reportsFolder = "target/screenshots";
                 SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
                 Configuration.remote = "http://localhost:4444/wd/hub";
+                capabilities.setCapability(ChromeOptions.CAPABILITY, options);
                 Configuration.browserCapabilities = capabilities;
                 break;
         }
