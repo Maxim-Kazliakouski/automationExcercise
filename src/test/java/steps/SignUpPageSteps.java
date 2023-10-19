@@ -66,7 +66,6 @@ public class SignUpPageSteps {
         signUpLoginPage
                 .deleteCratedAccount();
         log.info("Account has been deleted!");
-        sleep(100000);
     }
 
     @Step("Sign up with the creds: email -> {email}, password -> {password}")
