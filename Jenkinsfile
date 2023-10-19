@@ -102,10 +102,11 @@ pipeline {
                             //bat "docker rm selenoid"
                             //bat "docker rm selenoid-ui"
                             //bat "docker stop nginx"
-                            bat "docker stop automationexercise-selenoid-ui-1"
-                            bat "docker rm automationexercise-selenoid-ui-1"
-                            bat "docker stop automationexercise-selenoid-1"
-                            bat "docker rm automationexercise-selenoid-1"
+
+                            //bat "docker stop automationexercise-selenoid-ui-1"
+                            //bat "docker rm automationexercise-selenoid-ui-1"
+                            //bat "docker stop automationexercise-selenoid-1"
+                            //bat "docker rm automationexercise-selenoid-1"
                 }
             }
         }
