@@ -14,8 +14,10 @@ import io.qameta.allure.selenide.AllureSelenide;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -26,6 +28,8 @@ import utils.PropertyReader;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,7 +84,7 @@ public class BaseTest implements ITestListener {
     }
 
     @BeforeMethod
-    public void init(ITestResult result) {
+    public void init(ITestResult result) throws MalformedURLException {
         testCaseName = result.getMethod().getMethodName();
         log.info("TEST CASE NAME --> " + testCaseName);
         username = System.getProperty("USERNAME", PropertyReader.getProperty("qase.username"));
@@ -118,6 +122,7 @@ public class BaseTest implements ITestListener {
                 break;
             case ("remote"):
                 //for selenoid
+
                 ChromeOptions options = new ChromeOptions();
                 options.setExperimentalOption("prefs", new HashMap<String, Object>(){
                     {
@@ -134,6 +139,7 @@ public class BaseTest implements ITestListener {
                         });
                     }
                 });
+
                 capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                         "enableVNC", true,
                         "enableVideo", true,
@@ -146,29 +152,45 @@ public class BaseTest implements ITestListener {
                 Configuration.browserSize = "1920x1080";
                 Configuration.timeout = 10000;
                 Configuration.pageLoadTimeout = 120000;
-//                Configuration.downloadsFolder = "/home/selenium/Downloads";
                 Configuration.reportsFolder = "target/screenshots";
                 SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
                 Configuration.remote = "http://localhost:4444/wd/hub";
+
                 capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
                 Configuration.browserCapabilities = capabilities;
+
+                WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+                mainPageSteps = new MainPageSteps();
+                signUpPageSteps = new SignUpPageSteps();
+                loginPageSteps = new LoginPageSteps();
+                contactUsPageSteps = new ContactUsPageSteps();
+                testCasesPageSteps = new TestCasesPageSteps();
+                productsPageSteps = new ProductsPageSteps();
+                itemPageSteps = new ItemPageSteps();
+                cartPageSteps = new CartPageSteps();
+                orderCheckoutSteps = new OrderCheckoutSteps();
+                productsDetailsPageSteps = new ProductsDetailsPageSteps();
+                paymentPageSteps = new PaymentPageSteps();
+                driver.navigate().to(PropertyReader.getProperty("base_url"));
+                getWebDriver().manage().window().maximize();
                 break;
         }
 
         // create objects...
-        mainPageSteps = new MainPageSteps();
-        signUpPageSteps = new SignUpPageSteps();
-        loginPageSteps = new LoginPageSteps();
-        contactUsPageSteps = new ContactUsPageSteps();
-        testCasesPageSteps = new TestCasesPageSteps();
-        productsPageSteps = new ProductsPageSteps();
-        itemPageSteps = new ItemPageSteps();
-        cartPageSteps = new CartPageSteps();
-        orderCheckoutSteps = new OrderCheckoutSteps();
-        productsDetailsPageSteps = new ProductsDetailsPageSteps();
-        paymentPageSteps = new PaymentPageSteps();
-        open();
-        getWebDriver().manage().window().maximize();
+//        mainPageSteps = new MainPageSteps();
+//        signUpPageSteps = new SignUpPageSteps();
+//        loginPageSteps = new LoginPageSteps();
+//        contactUsPageSteps = new ContactUsPageSteps();
+//        testCasesPageSteps = new TestCasesPageSteps();
+//        productsPageSteps = new ProductsPageSteps();
+//        itemPageSteps = new ItemPageSteps();
+//        cartPageSteps = new CartPageSteps();
+//        orderCheckoutSteps = new OrderCheckoutSteps();
+//        productsDetailsPageSteps = new ProductsDetailsPageSteps();
+//        paymentPageSteps = new PaymentPageSteps();
+//        open();
+//        getWebDriver().manage().window().maximize();
     }
 
     @AfterMethod
