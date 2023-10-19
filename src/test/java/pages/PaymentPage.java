@@ -47,6 +47,7 @@ public class PaymentPage extends BasePage {
         String fileContents = null;
         try (FileInputStream inputStream = new FileInputStream(invoice)) {
             fileContents = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            log.info("INVOICE_CONTENT--> " + fileContents);
         } catch (IOException e) {
             e.printStackTrace();
             log.error("The invoice hasn't been downloaded");
