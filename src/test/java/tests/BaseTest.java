@@ -85,7 +85,6 @@ public class BaseTest implements ITestListener {
         password = System.getProperty("PASSWORD", PropertyReader.getProperty("qase.password"));
         DesiredCapabilities capabilities = new DesiredCapabilities();
         // for local launching tests...
-        System.out.println("LAUNCHING TYPE -->" + System.getProperty("launchType"));
         switch (System.getProperty("launchType")) {
             case ("local"):
                 Configuration.baseUrl = System.getProperty("URL", PropertyReader.getProperty("base_url"));
@@ -126,6 +125,7 @@ public class BaseTest implements ITestListener {
                 Configuration.browserSize = "1920x1080";
                 Configuration.timeout = 10000;
                 Configuration.pageLoadTimeout = 120000;
+                Configuration.downloadsFolder = PropertyReader.getProperty("downloadFolderForRemoteSelenoid");
                 Configuration.reportsFolder = "target/screenshots";
                 SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
                 Configuration.remote = "http://localhost:4444/wd/hub";
