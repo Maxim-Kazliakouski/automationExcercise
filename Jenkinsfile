@@ -79,9 +79,9 @@ pipeline {
                         -DlaunchType=$LAUNCH_TYPE \
                         -DvideoTestRecord=$VIDEO_TEST_RECORD \
                         -DlogsFromSelenoid=$LOGS_FROM_SELENOID \
-                        -DcodeProject=$CODEPROJECT \
+                        -DcodeProject=$CODE_PROJECT \
                         -Dtoken=$TOKEN_CREDENTIALS \
-                        -DtestRun=$TESTRUN \
+                        -DtestRun=$TEST_RUN \
                         "
                     }
 					catch (Exception error)
