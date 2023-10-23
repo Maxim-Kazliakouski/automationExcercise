@@ -85,6 +85,7 @@ public class TestListener implements ITestListener {
 //        }
 //    }
 //
+        log.info("PARAMS FROM TEST_RUN --> " + testRun);
         TestRunsChecker testRunsChecker = new TestRunsChecker();
         TestRunRunner testRunRunner = new TestRunRunner();
         testRunsChecker.isTestRunCreated();
