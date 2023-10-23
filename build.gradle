@@ -55,6 +55,7 @@ test {
         systemProperty 'videoTestRecord', Boolean.parseBoolean(System.getProperty("videoTestRecord"))
         systemProperty 'codeProject', System.getProperty("codeProject")
         systemProperty 'token', System.getProperty("token")
+        println("TEST RUN VALUE --> " + Boolean.parseBoolean(System.getProperty("testRun")))
         suites 'src/test/resources/UItests.xml'
 //        if there is necessity to launch in parallel for methods inside class
 //        parallel 'methods'
