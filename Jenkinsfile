@@ -75,6 +75,12 @@ pipeline {
                         // Run Maven on a Unix agent.
                         // sh "mvn clean -Dsurefire.suiteXmlFiles=src/test/resources/chromeLaunchTest.xml \
                         // To run Maven on a Windows agent, use
+
+                        withCredentials ([
+                            string(credentialsId: 'qase_token',
+                            variable: 'TOKEN_FOR_QASE'),
+                        ]) {
+
                         bat "gradle clean -DlaunchType=$LAUNCH_TYPE -DvideoTestRecord=$VIDEO_TEST_RECORD -DlogsFromSelenoid=$LOGS_FROM_SELENOID -DcodeProject=$CODE_PROJECT -DtestRun=$TEST_RUN -Dtoken=$TOKEN_FOR_QASE  test"
                     }
 					catch (Exception error)
