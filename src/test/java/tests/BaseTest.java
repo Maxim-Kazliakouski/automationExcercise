@@ -117,9 +117,9 @@ public class BaseTest implements ITestListener {
                 //for selenoid
                 capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                         "enableVNC", true,
-                        "enableVideo", System.getProperty("videoTestRecord"),
+                        "enableVideo", Boolean.parseBoolean(System.getProperty("videoTestRecord")),
                         "videoName", format(result.getMethod().getMethodName() + ".mp4"),
-                        "enableLog", System.getProperty("logsFromSelenoid"),
+                        "enableLog", Boolean.parseBoolean(System.getProperty("logsFromSelenoid")),
                         "logName", format(result.getMethod().getMethodName() + ".log")
                 ));
                 // capabilities.setCapability("videoScreenSize", "1920x1080");
