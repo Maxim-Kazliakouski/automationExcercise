@@ -54,8 +54,9 @@ test {
         systemProperty 'logsFromSelenoid', System.getProperty("logsFromSelenoid")
         systemProperty 'videoTestRecord', System.getProperty("videoTestRecord")
         systemProperty 'codeProject', System.getProperty("codeProject")
-
+        systemProperty 'token', System.getProperty("token")
         println("LAUNCH TYPE --> " + System.getProperty("launchType"))
+        println("TOKEN --> " + System.getProperty("token"))
         println("TEST RUN VALUE --> " + System.getProperty("testRun"))
         println("TEST CODE PROJECT --> " + System.getProperty("codeProject"))
         println("LOGS FROM SELENOID --> " + System.getProperty("logsFromSelenoid"))
