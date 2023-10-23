@@ -56,7 +56,7 @@ test {
         systemProperty 'codeProject', System.getProperty("codeProject")
 //        systemProperty 'token', System.getProperty("token")
         println("TEST RUN VALUE --> " + System.getProperty("testRun"))
-        println("TEST RUN VALUE --> " + System.getProperty("codeProject"))
+        println("TEST CODE PROJECT --> " + System.getProperty("codeProject"))
         suites 'src/test/resources/UItests.xml'
 //        if there is necessity to launch in parallel for methods inside class
 //        parallel 'methods'
