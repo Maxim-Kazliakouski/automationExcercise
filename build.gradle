@@ -54,7 +54,7 @@ test {
         systemProperty 'logsFromSelenoid', System.getProperty("logsFromSelenoid")
         systemProperty 'videoTestRecord', System.getProperty("videoTestRecord")
         systemProperty 'codeProject', System.getProperty("codeProject")
-        systemProperty 'token', System.getProperty("token")
+//        systemProperty 'token', System.getProperty("token")
         println("TEST RUN VALUE --> " + System.getProperty("testRun"))
         suites 'src/test/resources/UItests.xml'
 //        if there is necessity to launch in parallel for methods inside class
