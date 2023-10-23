@@ -50,12 +50,12 @@ test {
     clean
     useTestNG {
         systemProperty 'launchType', System.getProperty("launchType")
-        systemProperty 'testRun', Boolean.parseBoolean(System.getProperty("testRun"))
-        systemProperty 'logsFromSelenoid', Boolean.parseBoolean(System.getProperty("logsFromSelenoid"))
-        systemProperty 'videoTestRecord', Boolean.parseBoolean(System.getProperty("videoTestRecord"))
+        systemProperty 'testRun', System.getProperty("testRun")
+        systemProperty 'logsFromSelenoid', System.getProperty("logsFromSelenoid")
+        systemProperty 'videoTestRecord', System.getProperty("videoTestRecord")
         systemProperty 'codeProject', System.getProperty("codeProject")
         systemProperty 'token', System.getProperty("token")
-        println("TEST RUN VALUE --> " + Boolean.parseBoolean(System.getProperty("testRun")))
+        println("TEST RUN VALUE --> " + System.getProperty("testRun"))
         suites 'src/test/resources/UItests.xml'
 //        if there is necessity to launch in parallel for methods inside class
 //        parallel 'methods'
