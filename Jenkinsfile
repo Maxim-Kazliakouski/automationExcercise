@@ -79,7 +79,7 @@ pipeline {
                         withCredentials ([
                             string(credentialsId: 'qase_token',
                             variable: 'TOKEN_FOR_QASE'),
-                        ]) {
+                        ])
 
                         bat "gradle clean -DlaunchType=$LAUNCH_TYPE -DvideoTestRecord=$VIDEO_TEST_RECORD -DlogsFromSelenoid=$LOGS_FROM_SELENOID -DcodeProject=$CODE_PROJECT -DtestRun=$TEST_RUN -Dtoken=$TOKEN_FOR_QASE  test"
                     }
