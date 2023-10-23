@@ -21,7 +21,8 @@ import static java.lang.String.format;
 public class TestListener implements ITestListener {
     static Integer testRunID;
     String codeProject = PropertyReader.getProperty("codeProject");
-    boolean testRun = Boolean.parseBoolean(PropertyReader.getProperty("testRun"));
+//    boolean testRun = Boolean.parseBoolean(PropertyReader.getProperty("testRun"));
+    boolean testRun = Boolean.parseBoolean(System.getProperty("testRun"));
 
     @Override
     public void onTestStart(ITestResult iTestResult) {

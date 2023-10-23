@@ -6,7 +6,7 @@ import io.restassured.response.Response;
 public class TestRunRunner {
     ProjectAPI projectAPI;
     public Integer launchTestRun(String testRunName) {
-        String startTestRun = PropertyReader.getProperty("testRun");
+        String startTestRun = System.getProperty("testRun");
         String codeProject = PropertyReader.getProperty("codeProject");
         if (Boolean.parseBoolean(startTestRun)) {
             System.out.printf("======================================== Creating test run for project --> %s ========================================%n", PropertyReader.getProperty("codeProject"));

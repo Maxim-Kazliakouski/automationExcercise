@@ -11,7 +11,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class TestRunsChecker {
     public void isTestRunCreated() {
-        boolean isTestRun = Boolean.parseBoolean(PropertyReader.getProperty("testRun"));
+        boolean isTestRun = Boolean.parseBoolean(System.getProperty("testRun"));
         boolean isAPI = Boolean.parseBoolean(PropertyReader.getProperty("api"));
         if (!isAPI && isTestRun) {
             Gson gson = new Gson();
