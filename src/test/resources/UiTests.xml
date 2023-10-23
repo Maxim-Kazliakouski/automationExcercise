@@ -13,9 +13,9 @@
 <!--            <class name="tests.SignUpTest"/>-->
 <!--            <class name="tests.LoginTest"/>-->
 <!--            <class name="tests.ContactUsTest"/>-->
-<!--            <class name="tests.TestCasesTest"/>-->
+            <class name="tests.TestCasesTest"/>
 <!--            <class name="tests.ProductsTest"/>-->
-            <class name="tests.CartPageTest"/>
+<!--            <class name="tests.CartPageTest"/>-->
         </classes>
     </test>
 </suite>
