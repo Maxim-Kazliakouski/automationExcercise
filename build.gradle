@@ -60,12 +60,17 @@ test {
         systemProperty 'videoTestRecord', System.getProperty("videoTestRecord")
         systemProperty 'codeProject', System.getProperty("codeProject")
         systemProperty 'token', System.getProperty("token")
+        /*
+        in below mentioned code we print the parameters in Jenkins job...
+         */
+        println("Project params:")
         println("LAUNCH TYPE --> " + System.getProperty("launchType"))
         println("TOKEN --> " + System.getProperty("token"))
         println("TEST RUN VALUE --> " + System.getProperty("testRun"))
         println("TEST CODE PROJECT --> " + System.getProperty("codeProject"))
         println("LOGS FROM SELENOID --> " + System.getProperty("logsFromSelenoid"))
         println("VIDEO FROM SELENOID --> " + System.getProperty("videoTestRecord"))
+        println("-"*50);
         suites 'src/test/resources/UItests.xml'
 //        if there is necessity to launch in parallel for methods inside class
 //        parallel 'methods'
