@@ -15,7 +15,7 @@ public class Specifications {
                 .setBaseUri(url)
                 .setContentType(ContentType.JSON)
 //                .addHeader("Token", System.getProperty("token"))
-                .addHeader("Token", "a28732b982ed86784460295c02cdeeff7e34cefebcc89c1da92cd23787cc9714")
+                .addHeader("Token", "37952c284c05978b8743791909a75056e332816e833bdec694adb104cedd302f")
                 .build();
     }
 
