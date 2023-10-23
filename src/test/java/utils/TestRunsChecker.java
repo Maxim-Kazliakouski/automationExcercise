@@ -16,14 +16,14 @@ public class TestRunsChecker {
         if (!isAPI && isTestRun) {
             Gson gson = new Gson();
             ProjectAPI projectAPI = new ProjectAPI();
-            Response response = projectAPI.getAllRuns(PropertyReader.getProperty("codeProject"));
+            Response response = projectAPI.getAllRuns(System.getProperty("codeProject"));
             APIResponse<Project> result = gson.fromJson(response.asString(),
                     new TypeToken<APIResponse<Project>>() {
                     }.getType());
             int count = result.getResult().getCount();
             if (count != 0) {
                 int testRunID = result.getResult().entities.get(0).getId();
-                projectAPI.deleteTestRun(PropertyReader.getProperty("codeProject"), testRunID);
+                projectAPI.deleteTestRun(System.getProperty("codeProject"), testRunID);
                 log.info("<----> Test run has been deleted! <---->");
                 System.out.println("<----> Test run has been deleted! <---->");
             } else {

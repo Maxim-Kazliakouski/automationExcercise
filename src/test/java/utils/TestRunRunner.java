@@ -7,7 +7,7 @@ public class TestRunRunner {
     ProjectAPI projectAPI;
     public Integer launchTestRun(String testRunName) {
         String startTestRun = System.getProperty("testRun");
-        String codeProject = PropertyReader.getProperty("codeProject");
+        String codeProject = System.getProperty("codeProject");
         if (Boolean.parseBoolean(startTestRun)) {
             System.out.printf("======================================== Creating test run for project --> %s ========================================%n", PropertyReader.getProperty("codeProject"));
             projectAPI = new ProjectAPI();
