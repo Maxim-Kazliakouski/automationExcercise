@@ -49,6 +49,11 @@ test {
 //    dependsOn(updateConfigProperties)
     clean
     useTestNG {
+        /*
+        in below mentioned code we assigned system variables, which getting from the Jenkins
+        parametrized pipeline. And after getting values of these variables --> we used values
+        in our tests by 'System.getProperty' method
+         */
         systemProperty 'launchType', System.getProperty("launchType")
         systemProperty 'testRun', System.getProperty("testRun")
         systemProperty 'logsFromSelenoid', System.getProperty("logsFromSelenoid")

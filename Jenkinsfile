@@ -76,6 +76,9 @@ pipeline {
                         // sh "mvn clean -Dsurefire.suiteXmlFiles=src/test/resources/chromeLaunchTest.xml \
                         // To run Maven on a Windows agent, use
 
+                        //this block 'withCredentials' using for transfer encrypted data from Jenkins to the
+                        // build, f.e. qase-token has encrypted data in Jenkins credentials and after that
+                        // we transfer encrypted data to TOKEN_FOR_QASE which invokes when tests are launching
                         withCredentials ([
                             string(credentialsId: 'qase_token',
                             variable: 'TOKEN_FOR_QASE'),
