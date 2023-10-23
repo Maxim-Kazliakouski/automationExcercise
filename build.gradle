@@ -40,33 +40,10 @@ dependencies {
     implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.7'
 }
 
-//tasks.register("UI tests", Test) {
-//    description("Launching UI tests...")
-//    useTestNG() {
-//        suites "src/test/resources/UItests.xml"
-//        maxParall
-//    }
-//    testLogging {
-//        events "started", "passed", "skipped", "failed"
-//        exceptionFormat "full"
-//        showStandardStreams = true
-//    }
-//}
 allure {
-//    version = '2.11.2'
     autoconfigure = true
     aspectjweaver = true
-//    testResultsDir = File("C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\AutomationExercise\\target\\allure-results")
-//    allure.results.directory=build/allure-results
-//    allureJavaVersion = LATEST_VERSION
 }
-
-//System.getProperty("launchType")
-//println("LAUNCH TYPE IS --> " + System.getProperty("launchType"))
-
-//task updateConfigProperties {
-//    String value111 = System.getProperty("launchType");
-//}
 
 test {
 //    dependsOn(updateConfigProperties)
@@ -74,15 +51,16 @@ test {
     useTestNG {
         systemProperty 'launchType', System.getProperty("launchType")
         suites 'src/test/resources/UItests.xml'
+//        if there is necessity to launch in parallel for methods inside class
+//        parallel 'methods'
         parallel 'classes'
         threadCount 3
 //        System.getProperty("launchType")
 //        println("LAUNCH TYPE IS --> " + System.getProperty("launchType"))
     }
+    testLogging {
+        events "started", "passed", "skipped", "failed"
+        exceptionFormat "full"
+        showStandardStreams = true
+    }
 }
-
-//allureServe
-
-//task allureReporting() {
-//        allureServe.exec()
-//}
