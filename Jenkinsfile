@@ -75,7 +75,7 @@ pipeline {
                         // Run Maven on a Unix agent.
                         // sh "mvn clean -Dsurefire.suiteXmlFiles=src/test/resources/chromeLaunchTest.xml \
                         // To run Maven on a Windows agent, use
-                        bat "gradle clean test
+                        bat "gradle clean test \
                         -DlaunchType=$LAUNCH_TYPE \
                         -DvideoTestRecord=$VIDEO_TEST_RECORD \
                         -DlogsFromSelenoid=$LOGS_FROM_SELENOID \
