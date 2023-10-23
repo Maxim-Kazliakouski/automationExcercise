@@ -26,6 +26,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult iTestResult) {
         System.out.printf("======================================== STARTING TEST CASE --> '%s' ========================================%n", iTestResult.getMethod().getMethodName());
+        log.info("PARAMS FROM TEST_RUN --> " + testRun);
         log.info(format("========================= STARTING TEST CASE --> '%s' =========================", iTestResult.getMethod().getMethodName()));
 
     }
