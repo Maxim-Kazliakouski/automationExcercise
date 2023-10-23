@@ -21,58 +21,58 @@ import static org.testng.Assert.assertEquals;
 @Log4j2
 public class CartPageTest extends BaseTest {
 
-//    @TmsLink("case=23")
-//    @Test
-//    @Description("Test for checking subscription at cart page")
-//    public void subscriptionAtCartPage() {
-//        mainPageSteps
-//                .openPage()
-//                .clickOnTab("Cart");
-//        cartPageSteps
-//                .isCartPageOpened()
-//                .toSubscribe("111@mail.co");
-//    }
-//
-//    @TmsLink("case=24")
-//    @Test
-//    @Description("Remove Products From Cart")
-//    public void removeProductsFromCart() {
-//        Map<String, String> testData = Map.ofEntries(
-//                Map.entry("product1", "Men Tshirt"),
-//                Map.entry("product2", "Stylish Dress"));
-//        mainPageSteps
-//                .openPage()
-//                .isMainPageOpened()
-//                .clickOnTab("Products");
-//        productsPageSteps
-//                .isProductPageOpened()
-//                .addProduct(testData.get("product1"))
-//                .clickOnContinueShoppingButton()
-//                .addProduct(testData.get("product2"))
-//                .clickOnViewCartButton();
-//        cartPageSteps
-//                .isCartPageOpened()
-//                .deleteItem(testData.get("product1"));
-//        assertEquals(cartPageSteps.getAddedProducts().get(0), testData.get("product2"));
-//    }
-//
-//    @TmsLink("case=25")
-//    @Test
-//    @Description("Add products to cart from Recommended items")
-//    public void addRecommendedItems() {
-//        List<String> recommendedItems = new ArrayList<>(List.of("Winter Top"));
-//        mainPageSteps
-//                .openPage()
-//                .isMainPageOpened()
-//                .scrollToTheRecommendedItemsHeader()
-//                .isRecommendedItemsIsVisible()
-//                .chooseRecommendedItem(recommendedItems.get(0));
-//        productsPageSteps
-//                .clickOnViewCartButton();
-//        cartPageSteps
-//                .isCartPageOpened();
-//        assertEquals(cartPageSteps.getAddedProducts(), recommendedItems, "The recommended items in the cart doesn't match!");
-//    }
+    @TmsLink("case=23")
+    @Test
+    @Description("Test for checking subscription at cart page")
+    public void subscriptionAtCartPage() {
+        mainPageSteps
+                .openPage()
+                .clickOnTab("Cart");
+        cartPageSteps
+                .isCartPageOpened()
+                .toSubscribe("111@mail.co");
+    }
+
+    @TmsLink("case=24")
+    @Test
+    @Description("Remove Products From Cart")
+    public void removeProductsFromCart() {
+        Map<String, String> testData = Map.ofEntries(
+                Map.entry("product1", "Men Tshirt"),
+                Map.entry("product2", "Stylish Dress"));
+        mainPageSteps
+                .openPage()
+                .isMainPageOpened()
+                .clickOnTab("Products");
+        productsPageSteps
+                .isProductPageOpened()
+                .addProduct(testData.get("product1"))
+                .clickOnContinueShoppingButton()
+                .addProduct(testData.get("product2"))
+                .clickOnViewCartButton();
+        cartPageSteps
+                .isCartPageOpened()
+                .deleteItem(testData.get("product1"));
+        assertEquals(cartPageSteps.getAddedProducts().get(0), testData.get("product2"));
+    }
+
+    @TmsLink("case=25")
+    @Test
+    @Description("Add products to cart from Recommended items")
+    public void addRecommendedItems() {
+        List<String> recommendedItems = new ArrayList<>(List.of("Winter Top"));
+        mainPageSteps
+                .openPage()
+                .isMainPageOpened()
+                .scrollToTheRecommendedItemsHeader()
+                .isRecommendedItemsIsVisible()
+                .chooseRecommendedItem(recommendedItems.get(0));
+        productsPageSteps
+                .clickOnViewCartButton();
+        cartPageSteps
+                .isCartPageOpened();
+        assertEquals(cartPageSteps.getAddedProducts(), recommendedItems, "The recommended items in the cart doesn't match!");
+    }
 
     @TmsLink("case=26")
     @Test
