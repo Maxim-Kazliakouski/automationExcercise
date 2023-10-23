@@ -51,6 +51,7 @@ public class BaseTest implements ITestListener {
 
     String username;
     String password;
+    Boolean testRun;
     private String testCaseName;
 
     public String getTestCaseName() {
@@ -81,8 +82,11 @@ public class BaseTest implements ITestListener {
     public void init(ITestResult result) {
         testCaseName = result.getMethod().getMethodName();
         log.info("TEST CASE NAME --> " + testCaseName);
+
         username = System.getProperty("USERNAME", PropertyReader.getProperty("qase.username"));
         password = System.getProperty("PASSWORD", PropertyReader.getProperty("qase.password"));
+        testRun = Boolean.valueOf(System.getProperty("TEST_RUN", PropertyReader.getProperty("testRun")));
+        log.info("PARAMS FROM TEST_RUN --> " + testRun);
         DesiredCapabilities capabilities = new DesiredCapabilities();
         // for local launching tests...
         switch (System.getProperty("launchType")) {
