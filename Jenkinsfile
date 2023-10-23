@@ -81,7 +81,7 @@ pipeline {
                         -DlogsFromSelenoid=$LOGS_FROM_SELENOID \
                         -DcodeProject=$CODEPROJECT \
                         -Dtoken=$TOKEN_CREDENTIALS \
-                        -DtestRun=$TESTRUN
+                        -DtestRun=$TESTRUN \
                         "
                     }
 					catch (Exception error)
