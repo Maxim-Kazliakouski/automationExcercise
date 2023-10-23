@@ -81,7 +81,7 @@ public class CartPageTest extends BaseTest {
         Account account = AccountFactory.getAccount("Mrs", "Canada");
         OrderCheckout dataAccount = AccountFactory.getDataAccountForOrderCheckoutPage("Mrs", "Canada");
         Payment payment = PaymentFactory.getPayment();
-        String expectedInvoiceData = format("Hi %s %s, Your total purchase amount is 1900. Thank you Max", dataAccount.getFirstName(), dataAccount.getLastName());
+        String expectedInvoiceData = format("Hi %s %s, Your total purchase amount is 1900. Thank you", dataAccount.getFirstName(), dataAccount.getLastName());
         Map<String, String> testData = Map.ofEntries(
                 Map.entry("product1", "Men Tshirt"),
                 Map.entry("product2", "Stylish Dress"));
