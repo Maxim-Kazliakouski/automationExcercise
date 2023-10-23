@@ -50,6 +50,7 @@ test {
     clean
     useTestNG {
         systemProperty 'launchType', System.getProperty("launchType")
+        systemProperty 'testRun', System.getProperty("testRun")
         suites 'src/test/resources/UItests.xml'
 //        if there is necessity to launch in parallel for methods inside class
 //        parallel 'methods'
