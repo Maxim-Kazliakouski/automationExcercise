@@ -51,6 +51,8 @@ test {
     useTestNG {
         systemProperty 'launchType', System.getProperty("launchType")
         systemProperty 'testRun', System.getProperty("testRun")
+        systemProperty 'videoTestRecord', System.getProperty("videoTestRecord")
+        systemProperty 'logsFromSelenoid', System.getProperty("logsFromSelenoid")
         suites 'src/test/resources/UItests.xml'
 //        if there is necessity to launch in parallel for methods inside class
 //        parallel 'methods'
