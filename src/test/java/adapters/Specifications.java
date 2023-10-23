@@ -14,7 +14,7 @@ public class Specifications {
         return new RequestSpecBuilder()
                 .setBaseUri(url)
                 .setContentType(ContentType.JSON)
-                .addHeader("Token", PropertyReader.getProperty("token"))
+                .addHeader("Token", System.getProperty("token"))
                 .build();
     }
 
